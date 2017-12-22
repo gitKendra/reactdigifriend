@@ -1,6 +1,6 @@
 # Digital Friend/bot for streamer overlays
 
-## About This App
+## Setup This App
 
 This setup allows for a MongoDB/Node/Express/React app which can be easily deployed to Heroku.
 
