@@ -11,7 +11,14 @@ var UserSchema = new Schema({
   },
   refreshToken: {
     type: String
+  },
+  botName: {
+    type: String
+  },
+  channels: {
+    type: [String]
   }
+
 });
 
 var User = mongoose.model("User", UserSchema);

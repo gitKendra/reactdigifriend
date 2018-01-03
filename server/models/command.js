@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 
 var CommandSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    lowercase: true
   },
   action: {
     type: String,
