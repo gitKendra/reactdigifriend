@@ -7,12 +7,14 @@ var CommandSchema = new Schema({
     type: String,
     lowercase: true
   },
-  action: {
-    type: String,
+  message: String,
+  user_id: {
+    type: Schema.Types.ObjectId,
     default: null
   },
-  message: {
-    type: String
+  sprite_id: {
+    type: Schema.Types.ObjectId,
+    default: null
   }
 });
 

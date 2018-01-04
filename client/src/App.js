@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Setup from './components/Setup.js';
+import BotSettings from './components/BotSettings';
 
 class App extends Component {
   render() {
     return (
 
-      <Setup />
+      <BotSettings />
       // <div className="App">
       //   <div className="App-header">
       //     <img src={logo} className="App-logo" alt="logo" />

@@ -10,12 +10,14 @@ const title = (
 );
 
 // Query Component Declaration
-class Setup extends Component {
+class BotSettings extends Component {
   // Here we set initial variables for the component to be blanks
   state = { 
     name: "",
     oAuth: "",
-    channel: ""
+    channel: "",
+    isSubmitting: false,
+    isSubmitted: false
   }
 
   // Whenever we detect ANY change in the textbox, we register it.
@@ -30,10 +32,27 @@ class Setup extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log("Submit/Save button clicked");
-  // POST data to user settings in database
+    
+    this.setState({ 
+      channel: "#" + this.state.channel,
+      isSubmitting: true,
+      isSubmitted: false 
+    });
+    
+    // POST data to database
+
+    setTimeout(() => {
+      // Completed of async action, set loading state back
+      this.setState({ 
+        name: "",
+        oAuth: "",
+        channel: "",
+        isSubmitting: false,
+        isSubmitted: true
+      });
+    }, 2000);
   }
 
-  // Here we render the Query component
   render() {
 
     return (
@@ -42,6 +61,7 @@ class Setup extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <h4 className=""><strong>Bot name:</strong></h4>
+              <p>Twitch account to be used as the bot. Must be added as a mod in the channel.</p> 
               <input
                 type="text"
                 value={this.state.name}
@@ -52,18 +72,18 @@ class Setup extends Component {
               />
 
               <h4><strong>oAuth Token:</strong></h4>
-              <p>(Copy and paste from <a href="https://twitchapps.com/tmi/">Twitch Apps</a> including "oauth:")</p>
+              <p>Copy and paste the token from <a href="https://twitchapps.com/tmi/">Twitch Apps</a> including "oauth:")</p>
               <input
-              type="text"
-              value={this.state.oAuth}
-              className="form-control"
-              id="oAuth"
-              onChange={this.handleChange}
-              required
+                type="text"
+                value={this.state.oAuth}
+                className="form-control"
+                id="oAuth"
+                onChange={this.handleChange}
+                required
               />
 
-              <h4><strong>Channels</strong></h4>
-              <p>(Use a comma to separate multiple channels)</p>
+              <h4><strong>Channel</strong></h4>
+              <p>The Twitch channel that the the bot will be joining</p>
 
               <input
                 type="text"
@@ -77,10 +97,18 @@ class Setup extends Component {
             </div>
 
             {/* Here we create the onClick event that triggers the HandleSubmit */}
-            <Button bsStyle="danger" type="submit">
-              Save
+            <Button 
+              bsStyle="danger" 
+              type="submit"
+              onClick={!this.state.isSubmitting ? this.handleSubmit : null}
+            >
+              {this.state.isSubmitting ? 'Saving...' : 'Save'}
             </ Button>
-
+            <span>     </span>
+            <Button  
+              disabled={!this.state.isSubmitted}>
+              Next
+            </ Button>
           </form>
         </Panel>
 
@@ -160,4 +188,4 @@ class Setup extends Component {
 };
 
 // Export the module back to the route
-export default Setup;
+export default BotSettings;
