@@ -4,14 +4,17 @@ var Schema = mongoose.Schema;
 
 var CommandSchema = new Schema({
   name: {
-    type: String
-  },
-  action: {
     type: String,
+    lowercase: true
+  },
+  message: String,
+  user_id: {
+    type: Schema.Types.ObjectId,
     default: null
   },
-  message: {
-    type: String
+  sprite_id: {
+    type: Schema.Types.ObjectId,
+    default: null
   }
 });
 
