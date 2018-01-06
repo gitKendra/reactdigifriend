@@ -3,7 +3,14 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
+  twitchId: {
+    type: String,
+    unique: true
+  },
   username: {
+    type: String
+  },
+  logo: {
     type: String
   },
   accessToken: {
@@ -18,7 +25,7 @@ var UserSchema = new Schema({
     channels: { type: [String], default: undefined }
   },
   sprite_id: {
-    type: Integer
+    type: Number
   }
 });
 
