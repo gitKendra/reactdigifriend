@@ -32,7 +32,7 @@ export default class Login extends React.Component {
                         <p className="intro"> An interactive twitch stream application!
                         </p>
                         <p className="intro2"> To get started, login with your Twitch or Google credentials below. </p>
-                        <button className="btn btn-primary loginBtn" onClick={()=>this.handleClick()}><a href="/auth/twitch"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png">Log in with Twitch or Google.</a>
+                        <button className="btn btn-primary loginBtn" onClick={()=>this.handleClick()} href="/auth/twitch" img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png">
                         </button>
                     </div>
                 </div>
