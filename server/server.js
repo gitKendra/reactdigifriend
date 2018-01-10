@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 app.use(express.static("client/build"));
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/routepro";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/digifriend";
 mongoose.Promise = global.Promise;
 mongoose.connect(MONGODB_URI, {useMongoClient: true});
 
@@ -44,9 +44,9 @@ db.once("open", function() {
 });
 
 // -------------------------------------------------
-// Route to get all saved articles
+// Route to get all saved commands and return them sorted alphabetically
 app.get("/api/saved", function(req, res) {
-  Model.Command.find({})
+  Model.Command.find({}).sort('name')
     .exec(function(err, doc) {
       if (err) {
         console.log(err);
@@ -57,7 +57,7 @@ app.get("/api/saved", function(req, res) {
     });
 });
 
-// Route to add an article to saved list
+// Route to add command to saved list
 app.post("/api/saved", function(req, res) {
   var newCommand = new Model.Command(req.body);
   console.log(req.body);
@@ -71,7 +71,7 @@ app.post("/api/saved", function(req, res) {
   });
 });
 
-// Route to delete an article from saved list
+// Route to delete a command from saved list
 app.delete("/api/saved/:id", function(req, res) {
   console.log("req.params.id = " + req.params.id);
   Model.Command.findByIdAndRemove(req.params.id, function(err) {
@@ -83,6 +83,11 @@ app.delete("/api/saved/:id", function(req, res) {
     }
   });
 });
+
+// Get list of commands for a specific sprite
+app.get("/api/sprite/:id", function(req, res) {
+  Model.Command.find
+})
 
 // Any non API GET routes will be directed to our React App and handled by React Router
 app.get("*", function(req, res) {

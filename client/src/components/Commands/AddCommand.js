@@ -29,6 +29,7 @@ class AddCommand extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addCom(this.state.name, this.state.message, this.state.userId);
+    this.setState({ name: "", message: "" });
   }
 
   // Here we render the AddCommand component
