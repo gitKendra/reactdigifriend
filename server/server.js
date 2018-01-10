@@ -1,21 +1,18 @@
-const express = require("express");
-const path = require("path");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
-const mongoose = require("mongoose");
-const botClient = require("./scripts/botCommands.js");
-
-const PORT = process.env.PORT || 3001;
-const app = express();
+// Include Server Dependencies
+var express     = require("express");
+var bodyParser  = require("body-parser");
+var logger      = require("morgan");
+var mongoose    = require("mongoose");
 
 // Require Schemas
-const Command = require("./models/command.js");
+var Model = require("./models");
 
-// Require our routes
-var routes = require("./routes");
+// Create Instance of Express
+var app = express();
+var PORT = process.env.PORT || 4000; // Sets an initial port. We'll use this later in our listener
 
 // Run Morgan for Logging
-app.use(logger("dev"));
+// app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -28,18 +25,13 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+// Serve files created by create-react-app.
+app.use(express.static("client/build"));
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
-// If deployed, use the deployed database. Otherwise use the local database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/digifriend";
-
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/routepro";
+mongoose.Promise = global.Promise;
+mongoose.connect(MONGODB_URI, {useMongoClient: true});
 
 var db = mongoose.connection;
 
@@ -51,6 +43,57 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
+// -------------------------------------------------
+// Route to get all saved articles
+app.get("/api/saved", function(req, res) {
+  Model.Command.find({})
+    .exec(function(err, doc) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.send(doc);
+      }
+    });
+});
+
+// Route to add an article to saved list
+app.post("/api/saved", function(req, res) {
+  var newCommand = new Model.Command(req.body);
+  console.log(req.body);
+  newCommand.save(function(err, doc) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// Route to delete an article from saved list
+app.delete("/api/saved/:id", function(req, res) {
+  console.log("req.params.id = " + req.params.id);
+  Model.Command.findByIdAndRemove(req.params.id, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Deleted");
+    }
+  });
+});
+
+// Any non API GET routes will be directed to our React App and handled by React Router
+app.get("*", function(req, res) {
+  if ( process.env.NODE_ENV === 'production' ) {
+    res.sendFile(__dirname + "/client/build/index.html");
+  } else {
+    res.sendFile(__dirname + "/client/public/index.html");
+  }
+});
+
+// -------------------------------------------------
 app.listen(PORT, function() {
-  console.log(`App server now on port ${PORT}!`);
+  console.log("App listening on PORT: " + PORT);
 });

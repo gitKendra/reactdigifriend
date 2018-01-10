@@ -10,9 +10,10 @@ import React from "react";
 import { Route, IndexRoute, Router, browserHistory } from "react-router";
 
 // Reference the high-level components
-// import Main from "../components/Main";
-// import Search from "../components/Search";
-// import Saved from "../components/Saved";
+import Main from "../components/Main";
+import Commands from "../components/Commands";
+import Settings from "../components/Settings";
+import Dashboard from "../components/Dashboard";
 
 // Export the Routes
 export default (
@@ -20,12 +21,13 @@ export default (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
 
-      {/* If user selects Search or Saved show the appropriate component */}
-      <Route path="Search" component={Search} />
-      <Route path="Saved" component={Saved} />
+      {/* If user selects Commands or Settings show the appropriate component */}
+      <Route path="Dashboard" component={Dashboard} />
+      <Route path="Commands" component={Commands} />
+      <Route path="Settings" component={Settings} />
 
-      {/* If user selects any other path... we get the Home Route */}
-      <IndexRoute component={Search} />
+      {/* If user selects any other path... we get the Home Dashboard Route */}
+      <IndexRoute component={Dashboard} />
 
     </Route>
   </Router>
