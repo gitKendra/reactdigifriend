@@ -9,7 +9,7 @@ var Model = require("./models");
 
 // Create Instance of Express
 var app = express();
-var PORT = process.env.PORT || 4000; // Sets an initial port. We'll use this later in our listener
+var PORT = process.env.PORT || 4000;
 
 // Run Morgan for Logging
 // app.use(logger("dev"));
@@ -57,6 +57,21 @@ app.get("/api/saved", function(req, res) {
     });
 });
 
+// // Route to get all saved commands of a user and return them sorted alphabetically
+// app.get("/api/user/saved", function(req, res) {// example request /api/user/saved?user=92830329349340
+//   var userId = req.query.user;
+//   console.log(userId);
+//   Model.Command.find({ userId : req.query.user }).sort('name')
+//     .exec(function(err, doc) {
+//       if (err) {
+//         console.log(err);
+//       }
+//       else {
+//         res.json(doc);
+//       }
+//     });
+// });
+
 // Route to add command to saved list
 app.post("/api/saved", function(req, res) {
   var newCommand = new Model.Command(req.body);
@@ -84,9 +99,30 @@ app.delete("/api/saved/:id", function(req, res) {
   });
 });
 
-// Get list of commands for a specific sprite
+// Get document info about a specific sprite
 app.get("/api/sprite/:id", function(req, res) {
-  Model.Command.find
+  Model.Sprite.find({ id : req.params.id })
+  .exec(function(err, doc){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.json(doc);
+    }
+  });
+});
+
+// Get document info about a specific sprite
+app.get("/api/user/:id", function(req, res) {
+  Model.User.findById(req.params.id)
+  .exec(function(err, doc){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.json(doc);
+    }
+  });
 })
 
 // Any non API GET routes will be directed to our React App and handled by React Router

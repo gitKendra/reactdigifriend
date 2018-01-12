@@ -7,7 +7,7 @@ class AddCommand extends Component {
   state = { 
     name: "",
     message: "",
-    userId: "1",
+    userId: "558e1223594888306",
     collapse: true
   }
 
@@ -82,7 +82,7 @@ class AddCommand extends Component {
 
                       <h4><strong>User ID</strong></h4>
                       <input
-                        type="number"
+                        type="text"
                         value={this.state.userId}
                         className="form-control"
                         id="userId"

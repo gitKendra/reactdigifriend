@@ -13,6 +13,9 @@ var UserSchema = new Schema({
   logo: {
     type: String
   },
+  email: {
+    type: String
+  },
   accessToken: {
     type: String
   },
@@ -27,6 +30,7 @@ var UserSchema = new Schema({
   sprite_id: {
     type: Number
   }
+
 });
 
 var User = mongoose.model("User", UserSchema);
