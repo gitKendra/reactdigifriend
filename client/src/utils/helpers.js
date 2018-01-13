@@ -26,16 +26,7 @@ const helpers = {
         return response.data;
       });
   },
-    // // This will update an existing command to our database
-    // updateSaved: function(command) {
-    //   var updatedCommand = { name: command.name, message: command.message };
-    //   console.log('updateSaved', name);
-    //   return axios.put("/api/saved/${command._id}", updatedCommand)
-    //     .then(function(response) {
-    //       console.log("axios results", response);
-    //       return response.data;
-    //     });
-    // },
+
   // This will remove saved commands from our database
   deleteSaved: function(id) {
 
@@ -52,7 +43,17 @@ const helpers = {
       console.log("axios results", results);
       return results;
     })
+  },
+
+  getUser: function(id) {
+    return axios.get(`/api/user/${id}`)
+    .then(function(results){
+      console.log("axios results", results);
+      return results;
+    })
+   
   }
+
 };
 
 // We export the helpers function

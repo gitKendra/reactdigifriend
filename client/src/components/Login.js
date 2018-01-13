@@ -15,7 +15,7 @@ class Login extends Component {
         return(
             <div>
                 <h1>Login using Twitch</h1>
-                <img onClick={this.handleLogin} src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"/>
+                <img alt="Twitch Login" onClick={this.handleLogin} src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"/>
             </div>
         );
     };

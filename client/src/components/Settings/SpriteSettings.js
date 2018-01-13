@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-// Include the helpers for making API calls
-import helpers from "../../utils/helpers";
+// // Include the helpers for making API calls
+// import helpers from "../../utils/helpers";
 
 class SpriteSettings extends Component {
 
