@@ -45,8 +45,8 @@ class Main extends Component {
             </div>
           </nav>
 
-          {/* Jumbotron */}
-          <Jumbotron />
+          {/* Jumbotron
+          <Jumbotron /> */}
           
           {/* Here we will deploy the sub components (Dashboard, Commands or Settings */}
           {/* These sub-components are getting passed as this.props.children */}
