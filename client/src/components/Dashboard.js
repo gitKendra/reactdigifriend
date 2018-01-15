@@ -10,6 +10,10 @@ class Dashboard extends Component {
 
     state = {
         username: "",
+<<<<<<< HEAD
+=======
+        channel: "digifriend",
+>>>>>>> 06c2dc9213d275d69de1b832d8bff6c01365a485
         logo: "",
         id: "",
         channel: "",
@@ -17,6 +21,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
+<<<<<<< HEAD
         // Get user data from db to display customized dashboard
         helpers.getUser("5a58fde1b22f3594888cd306")
         .then( (user) => {
@@ -49,6 +54,19 @@ class Dashboard extends Component {
           
             this.setState({ client: client });
         });
+=======
+        // // Get user data from db to display customized dashboard
+        // helpers.getUser("5a5a4271bd5601fb56ccffb7")
+        // .then( (user) => {
+        //     var channel = user.data.botSettings.channels[0].substring(1);
+        //     this.setState({
+        //         username: user.data.username,
+        //         channel: channel,
+        //         logo: user.data.logo,
+        //         id: user.data._id
+        //     });
+        // });
+>>>>>>> 06c2dc9213d275d69de1b832d8bff6c01365a485
     }
 
 
