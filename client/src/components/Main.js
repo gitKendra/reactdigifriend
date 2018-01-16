@@ -5,9 +5,14 @@ import React, { Component } from 'react'
 import { Link } from "react-router";
 import Jumbotron from './Jumbotron';
 import Login from './Login';
+import Navbar from './Navbar';
 
 // Create the Main component
 class Main extends Component {
+  state = {
+    isLoggedIn: false,
+    user: {}
+  }
 
   render() {
 
@@ -15,35 +20,8 @@ class Main extends Component {
       // We can only render a single div. So we need to group everything inside of this main-container one
       <div className="main-container">
         <div className="container">
-          {/* Navbar */}
-          <nav className="navbar navbar-default">
-            <div className="container-fluid">
-              <div className="navbar-header">
-                <button
-                  type="button"
-                  className="navbar-toggle"
-                  data-toggle="collapse"
-                  data-target=".navbar-ex1-collapse"
-                >
-                  <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                </button>
-                <Link className="navbar-brand" to="/">DigiFriend</Link>
-              </div>
 
-              <div className="collapse navbar-collapse navbar-ex1-collapse">
-                <ul className="nav navbar-nav navbar-left">
-                  {/* Using <Link> in place of <a> and "to" in place of "href" */}
-                  <li><Link to="/dashboard">Dashboard</Link></li>
-                  <li><Link to="/commands">Commands</Link></li>
-                  <li><Link to="/settings">Settings</Link></li>
-                </ul>
-              </div>
-
-            </div>
-          </nav>
+          <Navbar user={(this.state.isLoggedIn ? this.state.user : null)} />
 
           {/* Jumbotron
           <Jumbotron /> */}
