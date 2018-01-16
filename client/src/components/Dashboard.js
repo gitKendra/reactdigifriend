@@ -10,7 +10,6 @@ class Dashboard extends Component {
 
     state = {
         username: "",
-        channel: "digifriend",
         logo: "",
         id: "",
         channel: "",
@@ -23,7 +22,7 @@ class Dashboard extends Component {
         //user id on kk home: 5a58fde1b22f3594888cd306
         helpers.getUser("5a5a4271bd5601fb56ccffb7")
         .then( (user) => {
-            // var channel = user.data.botSettings.channels[0].substring(1);
+          
             const botSettings = user.data.botSettings;
 
             this.setState({
