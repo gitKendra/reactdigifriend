@@ -18,7 +18,9 @@ class Dashboard extends Component {
 
     componentDidMount() {
         // Get user data from db to display customized dashboard
-        helpers.getUser("5a58fde1b22f3594888cd306")
+        // user id on KK laptop: 5a5a4271bd5601fb56ccffb7
+        //user id on kk home: 5a58fde1b22f3594888cd306
+        helpers.getUser("5a5a4271bd5601fb56ccffb7")
         .then( (user) => {
           
             const botSettings = user.data.botSettings;
@@ -48,6 +50,7 @@ class Dashboard extends Component {
               });
           
             this.setState({ client: client });
+        });
     }
 
 
