@@ -1,7 +1,7 @@
 // Include React as a dependency
 import React, { Component } from 'react';
-import BotSettings from './Settings/BotSettings';
-import SpriteSettings from './Settings/SpriteSettings';
+import BotSettings from '../components/Settings/BotSettings';
+import SpriteSettings from '../components/Settings/SpriteSettings';
 // import { Panel } from 'react-bootstrap';
 // import { Button } from 'react-bootstrap';
 

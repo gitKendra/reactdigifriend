@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 
 
 class Chatbox extends Component{
-
+    // state = {
+    //     bot: null
+    // }
     componentDidMount(){
-        console.log(this.props);
-    const bot = this.props.botClient;
+        console.log(this.props.botClient);
+        const bot = this.props.botClient;
 
     // Allow the bot to listen to any messages in the chat
     bot.on("chat", function (channel, userstate, message, self) {
@@ -82,6 +84,7 @@ class Chatbox extends Component{
         bot.say(channel, `${username} ${chatMessage}`);
     }
 
+    // this.setState({bot: bot});
 }
 
     render() {
@@ -90,6 +93,7 @@ class Chatbox extends Component{
                 scrolling="yes" 
                 id="chat_embed" 
                 src={`http://www.twitch.tv/embed/${this.props.channel}/chat`} 
+                // src={`http://www.twitch.tv/embed/digiFriend/chat`} 
                 height="500" 
                 width="350">
             </iframe>
