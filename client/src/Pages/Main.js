@@ -1,16 +1,10 @@
-// Include React as a dependency
 import React, { Component } from 'react'
-// Including the Link component from React Router to navigate within our application without full page reloads
-// https://github.com/ReactTraining/react-router/blob/master/docs/API.md#link
-import { Link } from "react-router";
-import Jumbotron from './Jumbotron';
-import Login from './Login';
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar';
 
 // Create the Main component
 class Main extends Component {
   state = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     user: {}
   }
 
@@ -19,14 +13,17 @@ class Main extends Component {
     return (
       // We can only render a single div. So we need to group everything inside of this main-container one
       <div className="main-container">
-        <div className="container">
+          {/* Render Navbar without user if not logged in */}
+          {/* {(!this.state.isLoggedIn &&  */}
+            <div>
+              <Navbar isLoggedIn={this.state.isLoggedIn} />
 
-          <Navbar user={(this.state.isLoggedIn ? this.state.user : null)} />
-
+            </div> 
+          {/* )} */}
           {/* Jumbotron
           <Jumbotron /> */}
           
-          {/* Here we will deploy the sub components (Dashboard, Commands or Settings */}
+          {/* Here we will deploy the sub components (DashboardWrapper, Settings */}
           {/* These sub-components are getting passed as this.props.children */}
           {this.props.children}
 
@@ -37,7 +34,6 @@ class Main extends Component {
                Proudly built using MERN stack
             </p>
           </footer> */}
-        </div>
       </div>
     );
   }

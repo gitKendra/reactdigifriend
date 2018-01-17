@@ -4,15 +4,16 @@ import axios from "axios";
 // Helper Functions
 const helpers = {
 
-  // This will return any saved commands from our database
-  getSaved: function() {
-    return axios.get("/api/saved")
+  // Returns saved custom commands by user from our database
+  getSaved: function(id) {
+    return axios.get(`/api/saved/user/${id}`)
       .then(function(results) {
-        console.log("axios results", results);
+        console.log("axios results getSaved:", results);
         return results;
       });
   },
-  // This will save new commands to our database
+
+  // Saves new commands to our database
   postSaved: function(name, message, userId) {
     var formattedName = name.trim();
 
@@ -27,7 +28,7 @@ const helpers = {
       });
   },
 
-  // This will remove saved commands from our database
+  // Removes saved commands from our database
   deleteSaved: function(id) {
 
     return axios.delete(`/api/saved/${id}`)
@@ -37,23 +38,31 @@ const helpers = {
     });
   },
 
-  twitchLogin: function() {
-    return axios.get("/auth/twitch")
-    .then(function(results){
-      console.log("axios results", results);
-      return results;
-    })
-  },
+  // twitchLogin: function() {
+  //   return axios.get("/auth/twitch")
+  //   .then(function(results){
+  //     console.log("axios results", results);
+  //     return results;
+  //   })
+  // },
 
   getUser: function(id) {
     return axios.get(`/api/user/${id}`)
     .then(function(results){
-      console.log("axios results", results);
+      console.log("axios results getUser:", results);
       return results;
     })
    
-  }
+  },
 
+  // Returns the Sprite doc from our database
+  getSprite: function(id) {
+    return axios.get(`/api/sprite/${id}`)
+      .then(function(results) {
+        console.log("axios results getSprite:", results);
+        return results;
+      });
+  },
 };
 
 // We export the helpers function

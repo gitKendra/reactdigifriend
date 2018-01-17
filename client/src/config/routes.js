@@ -10,10 +10,11 @@ import React from "react";
 import { Route, IndexRoute, Router, browserHistory } from "react-router";
 
 // Reference the high-level components
-import Main from "../components/Main";
+import Main from "../Pages/Main";
+import Login from "../Pages/Login";
+import Settings from "../Pages/Settings";
+import DashboardWrapper from "../Pages/DashboardWrapper";
 import Commands from "../components/Commands";
-import Settings from "../components/Settings";
-import Dashboard from "../components/Dashboard";
 
 // Export the Routes
 export default (
@@ -21,13 +22,13 @@ export default (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
 
-      {/* If user selects Commands or Settings show the appropriate component */}
-      <Route path="Dashboard" component={Dashboard} />
-      <Route path="Commands" component={Commands} />
+      {/* If user selects Dashboard or Settings show the appropriate component */}
+      <Route path="Dashboard" component={DashboardWrapper}></Route>
       <Route path="Settings" component={Settings} />
+      <Route path="Login" component={Login} />
 
       {/* If user selects any other path... we get the Home Dashboard Route */}
-      <IndexRoute component={Dashboard} />
+      <IndexRoute component={Main} />
 
     </Route>
   </Router>

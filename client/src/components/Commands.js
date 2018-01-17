@@ -11,49 +11,49 @@ import helpers from "../utils/helpers";
 // Create the Commands component
 class Commands extends Component {
 
-  state = { 
-    dbCommands: []
-  }
+  // state = { 
+  //   dbCommands: []
+  // }
 
-  componentDidMount(){
-    this.getCommands();
-  }
+  // componentDidMount(){
+  //   this.getCommands();
+  // }
 
-  // Function to retrieve the commands stored in the database
-  getCommands = () => {
-    helpers.getSaved()
-    .then((commandData) => {
-      this.setState({ dbCommands: commandData.data });
-      console.log("retrieved commands from db", commandData.data);
-    })
-  }
+  // // Function to retrieve the commands stored in the database
+  // getCommands = () => {
+  //   helpers.getSaved()
+  //   .then((commandData) => {
+  //     this.setState({ dbCommands: commandData.data });
+  //     console.log("retrieved commands from db", commandData.data);
+  //   })
+  // }
 
-  // These functions will be passed down into child components
-  // Function to add a command to the database then update state
-  addCommand = (newName, newMessage, userId) => {
-    helpers.postSaved(newName, newMessage, userId)
-    .then((data) => {
-      this.getCommands();
-    });
-  }
+  // // These functions will be passed down into child components
+  // // Function to add a command to the database then update state
+  // addCommand = (newName, newMessage, userId) => {
+  //   helpers.postSaved(newName, newMessage, userId)
+  //   .then((data) => {
+  //     this.getCommands();
+  //   });
+  // }
 
-  // Function to delete a command from the database then update state
-  delCommand = (id) => {
-    helpers.deleteSaved(id)
-    .then( () => {
-      this.getCommands();
-    });
-  }
+  // // Function to delete a command from the database then update state
+  // delCommand = (id) => {
+  //   helpers.deleteSaved(id)
+  //   .then( () => {
+  //     this.getCommands();
+  //   });
+  // }
 
   // Render the component
   render() {
     return (
-      <div className="main-container">
+      <div className="cmd-container">
 
         {/* Pass the addCommand function to enable AddCommand function in child  */}
-        <AddCommand addCom={this.addCommand} />
+        <AddCommand addCom={this.props.addCom} />
         {/* Pass the delCommand function and commands from database to enable its use in child  */}
-        <Saved delCom={this.delCommand} comArray={this.state.dbCommands} />
+        <Saved delCom={this.props.delCom} comArray={this.props.userCom} />
 
       </div>
     );

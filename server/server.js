@@ -44,9 +44,9 @@ db.once("open", function() {
 });
 
 // -------------------------------------------------
-// Route to get all saved commands and return them sorted alphabetically
-app.get("/api/saved", function(req, res) {
-  Model.Command.find({}).sort('name')
+// Route to get all user saved commands and return them sorted alphabetically
+app.get("/api/saved/user/:id", function(req, res) {
+  Model.Command.find({userId : req.params.id}).sort('name')
     .exec(function(err, doc) {
       if (err) {
         console.log(err);
@@ -57,20 +57,18 @@ app.get("/api/saved", function(req, res) {
     });
 });
 
-// // Route to get all saved commands of a user and return them sorted alphabetically
-// app.get("/api/user/saved", function(req, res) {// example request /api/user/saved?user=92830329349340
-//   var userId = req.query.user;
-//   console.log(userId);
-//   Model.Command.find({ userId : req.query.user }).sort('name')
-//     .exec(function(err, doc) {
-//       if (err) {
-//         console.log(err);
-//       }
-//       else {
-//         res.json(doc);
-//       }
-//     });
-// });
+// Route that returns the Sprite doc from database
+app.get("/api/sprite/:id", function(req, res) {
+  Model.Sprite.find({_id : req.params.id})
+    .exec(function(err, doc) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.send(doc);
+      }
+    });
+});
 
 // Route to add command to saved list
 app.post("/api/saved", function(req, res) {

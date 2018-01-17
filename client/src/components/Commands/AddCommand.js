@@ -7,7 +7,6 @@ class AddCommand extends Component {
   state = { 
     name: "",
     message: "",
-    userId: "558e1223594888306",
     collapse: true
   }
 
@@ -28,7 +27,7 @@ class AddCommand extends Component {
   // This code handles the sending of the search terms to the parent Commands component
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addCom(this.state.name, this.state.message, this.state.userId);
+    this.props.addCom(this.state.name, this.state.message);
     this.setState({ name: "", message: "" });
   }
 
@@ -77,16 +76,6 @@ class AddCommand extends Component {
                         id="message"
                         onChange={this.handleChange}
                         placeholder="This is what the bot will say in chat if triggered by !command"
-                        required
-                      />
-
-                      <h4><strong>User ID</strong></h4>
-                      <input
-                        type="text"
-                        value={this.state.userId}
-                        className="form-control"
-                        id="userId"
-                        onChange={this.handleChange}
                         required
                       />
 
