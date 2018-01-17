@@ -4,6 +4,7 @@ import Commands from './Commands';
 
 class Dashboard extends Component {
 
+<<<<<<< HEAD
     // state = {
         // username: "",
         // logo: "",
@@ -44,6 +45,48 @@ class Dashboard extends Component {
         //           console.log(`joined ${channel} channel`);
         //         });
         //       });
+=======
+    state = {
+        username: "",
+        logo: "",
+        id: "",
+        channel: "",
+        client: null
+    }
+
+    componentDidMount() {
+        // Get user data from db to display customized dashboard
+        // user id on KK laptop: 5a5a4271bd5601fb56ccffb7
+        //user id on kk home: 5a58fde1b22f3594888cd306
+        helpers.getUser("5a5a4271bd5601fb56ccffb7")
+        .then( (user) => {
+          
+            const botSettings = user.data.botSettings;
+
+            this.setState({
+                username: user.data.username,
+                logo: user.data.logo,
+                id: user.data._id,
+                channel: botSettings.channels[0].substring(1)
+            });
+
+            // Create and setup bot
+            var client = tmi.client({
+                options: {debug: true},
+                connection: {reconnect: true},
+                identity: {username: botSettings.name, password: botSettings.oAuth},
+                channels: botSettings.channels
+            });
+
+            // Connect to chat server
+            client.connect().then(data => {
+                console.log(`Connected to ${data[0]} on port ${data[1]}`);
+                // Join chat server
+                client.join(this.state.channel).then(channel => {
+                  console.log(`joined ${channel} channel`);
+                });
+              });
+>>>>>>> 85f9d31d6f4dc6312e5fe7cb2ba8afe6a1fe41ec
           
         //     this.setState({ client: client });
         // });
