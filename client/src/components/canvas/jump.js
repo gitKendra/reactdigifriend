@@ -166,25 +166,25 @@ function updateBreath() {
   }
 }
 
-// function updateBlink() { 
+function updateBlink() { 
 				
-//   eyeOpenTime += blinkUpdateTime;
+  eyeOpenTime += blinkUpdateTime;
 	
-//   if(eyeOpenTime >= timeBtwBlinks){
-// 	blink();
-//   }
-// }
+  if(eyeOpenTime >= timeBtwBlinks){
+	blink();
+  }
+}
 
-// function blink() {
+function blink() {
 
-//   curEyeHeight -= 1;
-//   if (curEyeHeight <= 0) {
-// 	eyeOpenTime = 0;
-// 	curEyeHeight = maxEyeHeight;
-//   } else {
-// 	setTimeout(blink, 10);
-//   }
-// }
+  curEyeHeight -= 1;
+  if (curEyeHeight <= 0) {
+	eyeOpenTime = 0;
+	curEyeHeight = maxEyeHeight;
+  } else {
+	setTimeout(blink, 10);
+  }
+}
 
 function jump() {
 	
