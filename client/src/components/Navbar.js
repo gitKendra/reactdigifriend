@@ -1,7 +1,36 @@
 import React, {Component} from 'react';
-import { Link } from "react-router";
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
+
+    state = {
+        isLoggedIn: true
+    }
+
+    componentDidMount(){
+        if(!this.props){
+            this.setState({isLoggedIn: this.props.isLoggedIn})
+        }
+    }
+
+    renderNavLinks = () => {
+
+        if(this.state.isLoggedIn){
+            return(
+                <ul className="nav navbar-nav navbar-left">
+                    <li><Link to="/dashboard">Dashboard</Link></li>
+                    <li><Link to="/settings">Settings</Link></li>
+                </ul>
+            );
+        }
+        else{
+            return(
+                <ul className="nav navbar-nav navbar-left">
+                    <li><Link to="/login">Login</Link></li>
+                </ul>                
+            )
+        }
+    }
 
     render() {
       return (
@@ -24,11 +53,7 @@ class Navbar extends Component {
                 </div>
 
                 <div className="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul className="nav navbar-nav navbar-left">
-                    {/* Using <Link> in place of <a> and "to" in place of "href" */}
-                    <li><Link to="/dashboard">Dashboard</Link></li>
-                    <li><Link to="/settings">Settings</Link></li>
-                    </ul>
+                    {this.renderNavLinks()}
                 </div>
 
               </div>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-// import { Link } from 'react-router'
-
+import Navbar from "../components/Navbar"
 import helpers from '../utils/helpers';
 
 
@@ -14,6 +13,7 @@ class Login extends Component {
 
         return(
             <div>
+                <Navbar isLoggedIn={false}/>
                 <h1>Login using Twitch</h1>
                 <img alt="Twitch Login" onClick={this.handleLogin} src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"/>
             </div>
