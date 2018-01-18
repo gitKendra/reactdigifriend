@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Route, Link } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Commands from '../components/Commands'
 import Navbar from '../components/Navbar';
@@ -173,7 +173,8 @@ class DashboardWrapper extends Component{
             return(
                 <div className="dashboard-container">
                     <Dashboard channel={this.state.channel} botClient={this.state.botClient}/>
-                    <Commands delCom={this.delCommand} addCom={this.addCommand} userCom={this.state.userCommands} />
+                    {/* <Commands delCom={this.delCommand} addCom={this.addCommand} userCom={this.state.userCommands} /> */}
+
                 </div>
             )
         }
@@ -185,10 +186,33 @@ class DashboardWrapper extends Component{
 
     render(){
 
-        return(             
-            
-            this.renderDashboard()
+        const {match} = this.props;
 
+        return(             
+            <div>
+                <Navbar isLoggedIn={true}/>
+                
+                <Link to={`${match.url}/commands`}>
+                        List of commands
+                </Link>
+                <Route 
+                    exact path={match.url} 
+                    render={() => (
+                        this.renderDashboard()
+                    )}
+                />
+                <Route 
+                    path={`${match.url}/commands`} 
+                    render={ props => 
+                        <Commands 
+                            delCom={this.delCommand} 
+                            addCom={this.addCommand} 
+                            userCom={this.state.userCommands} 
+                            {...props} 
+                        />
+                    }
+                />
+            </div>
         );
 
     }

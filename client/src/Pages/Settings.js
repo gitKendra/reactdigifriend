@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import BotSettings from '../components/Settings/BotSettings';
 import SpriteSettings from '../components/Settings/SpriteSettings';
+import Navbar from '../components/Navbar';
 // import { Panel } from 'react-bootstrap';
 // import { Button } from 'react-bootstrap';
 
@@ -18,6 +19,7 @@ class Settings extends Component {
 
     return (
         <div>
+          <Navbar isLoggedIn={true}/>
             <BotSettings />
             <SpriteSettings />
         </div>
