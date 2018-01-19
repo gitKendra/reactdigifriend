@@ -31,73 +31,56 @@ class AddCommand extends Component {
     this.setState({ name: "", message: "" });
   }
 
+  renderForm = () => {
+    return(
+    <div className="container">
+    <div className="card mt-4">
+      <div className="card-body">
+        <div className="text-center">
+          <h4 className="font-up mb-0">Add Command</h4>
+        </div>
+<form onSubmit={this.handleSubmit}>
+          <div className="md-form">
+              <input 
+                type="text"
+                value={this.state.name}
+                className="form-control"
+                id="name"
+                onChange={this.handleChange}
+                placeholder="Command name"
+                required
+              />
+          </div>
+
+          <div className="md-form">
+            <input 
+              type="text"
+              value={this.state.message}
+              className="form-control"
+              id="message"
+              onChange={this.handleChange}
+              placeholder="Command message"
+              required
+            />
+          </div>
+
+          <div className="text-center pull-right">
+              <button className="btn btn-sm btn-deep-orange">Save</button>
+          </div>
+</form>
+      </div>
+    </div>
+    </div>
+    )
+  }
+
   // Here we render the AddCommand component
   render() {
 
     return (
-      <div className="main-container">
 
-        <div className="row">
-          <div className="col-lg-12">
+        this.renderForm()
 
-            <div className="panel panel-primary">
-              <div className="panel-heading">
-                <h1 className="panel-title" role="button" onClick={this.toggle}>
-                {/* <a role="button" onClick={this.toggle}> */}
-                  <strong>
-                    <i className="fa fa-plus-square-o" aria-hidden="true"></i> Add a Command
-                    <i className={"fa fa-chevron-"+ (this.state.collapse ? "down" : "up")+" pull-right"} aria-hidden="true"></i>
-                  </strong>
-                  {/* </a> */}
-                </h1>
-              </div>
-              <div className={"collapse"+ (this.state.collapse ? "" : " in")}>
-                <div className="panel-body">
-
-                  {/* Note how we associate the text-box inputs with the state values */}
-                  <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                      <h4 className=""><strong>Command Name</strong></h4>
-                      <input
-                        type="text"
-                        value={this.state.name}
-                        className="form-control"
-                        id="name"
-                        onChange={this.handleChange}
-                        placeholder="ex: !command"
-                        required
-                      />
-
-                      <h4><strong>Command Message</strong></h4>
-                      <input
-                        type="text"
-                        value={this.state.message}
-                        className="form-control"
-                        id="message"
-                        onChange={this.handleChange}
-                        placeholder="This is what the bot will say in chat if triggered by !command"
-                        required
-                      />
-
-                    </div>
-
-                    <div className="pull-right">
-                      <button
-                        type="submit"
-                        className="btn btn-danger"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
     );
   }
 };

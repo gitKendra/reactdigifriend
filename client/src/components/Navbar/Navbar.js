@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
-import '../Navbar/Navbar.css';
+import './Navbar.css';
 
 class Navbar extends Component {
 
@@ -8,7 +8,7 @@ class Navbar extends Component {
     
       return (
         
-        <nav className="navbar navbar-expand-lg navbar-dark indigo">
+        <nav className="navbar navbar-expand-md navbar-dark indigo">
             <NavLink className="navbar-brand" to="/">DigiFriend</NavLink>
 
             <button
@@ -26,7 +26,7 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <a><NavLink to="/" className="navLink" activeClassName="active">Home</NavLink></a>
+                        <NavLink to="/" className="navLink" activeClassName="active">Home</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink to="/dashboard" className="navLink" activeClassName="active">Dashboard</NavLink>
@@ -39,7 +39,7 @@ class Navbar extends Component {
 
             <div className="navbar-nav">
                 <NavLink to="/login" className="navLink">
-                    <span className="user-image"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                    <span className="user-image"><i className="fa fa-user-circle-o" aria-hidden="true"></i></span>
                     Login
                 </NavLink>
             </div>
