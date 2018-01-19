@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Commands from '../components/Commands'
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import helpers from '../utils/helpers';
 import tmi from "tmi.js";
 
@@ -12,7 +12,7 @@ class DashboardWrapper extends Component{
     state = {
         username: "",
         logo: "",
-        id: "5a5a4271bd5601fb56ccffb7",
+        id: "5a58fde1b22f3594888cd306",
         channel: "",
         client: null,
         userCommands: [],
@@ -190,7 +190,7 @@ class DashboardWrapper extends Component{
 
         return(             
             <div>
-                <Navbar isLoggedIn={true}/>
+                <Navbar />
                 
                 <Link to={`${match.url}/commands`}>
                         List of commands

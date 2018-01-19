@@ -1,0 +1,16 @@
+.navLink,
+.navLink:hover {
+    text-decoration: none;
+    color: white;
+}
+.nav-item {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.nav-item:hover {
+    background-color: #5c6bc0;
+}
+.user-image {
+    padding-right: 0.5rem;
+    font-size: 20px;
+}
