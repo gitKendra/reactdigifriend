@@ -16,7 +16,8 @@ class DashboardWrapper extends Component{
         channel: "",
         client: null,
         userCommands: [],
-        spriteCommands: []
+        spriteCommands: [],
+        comBtnVisible: ""
     }
 
     componentDidMount() {
@@ -26,7 +27,7 @@ class DashboardWrapper extends Component{
         this.loadBotClient();
         this.getSpriteCommands();
         this.getUserCommands();
-        
+        this.setState({ comBtnVisible: true })
         
     }
 
@@ -173,15 +174,16 @@ class DashboardWrapper extends Component{
             return(
                 <div className="dashboard-container">
                     <Dashboard channel={this.state.channel} botClient={this.state.botClient}/>
-                    {/* <Commands delCom={this.delCommand} addCom={this.addCommand} userCom={this.state.userCommands} /> */}
-
                 </div>
             )
         }
-        else {
-            //render a loading image
-            <p>This is a loading page...</p>
-        }
+    }
+
+    showComBtn = () => {
+        this.setState({ comBtnVisible: true });
+    }
+    showDashBtn = () => {
+        this.setState({ comBtnVisible: false })
     }
 
     render(){
@@ -191,10 +193,16 @@ class DashboardWrapper extends Component{
         return(             
             <div>
                 <Navbar />
+                { this.state.comBtnVisible ?
+                <button className="btn btn-success" onClick={this.showDashBtn}>
+                    <Link to={`${match.url}/commands`}>List of commands</Link>
+                </button>
+                :
+                <button className="btn btn-success" onClick={this.showComBtn}>
+                    <Link to={"/dashboard"}>Back to Dashboard</Link>
+                </button>               
+            }
                 
-                <Link to={`${match.url}/commands`}>
-                        List of commands
-                </Link>
                 <Route 
                     exact path={match.url} 
                     render={() => (
