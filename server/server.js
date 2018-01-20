@@ -110,7 +110,7 @@ app.get("/api/sprite/:id", function(req, res) {
   });
 });
 
-// Get document info about a specific sprite
+// Get document info about a specific user
 app.get("/api/user/:id", function(req, res) {
   Model.User.findById(req.params.id)
   .exec(function(err, doc){
@@ -122,6 +122,47 @@ app.get("/api/user/:id", function(req, res) {
     }
   });
 })
+
+// Add user to database
+app.post("/api/user/", function(req, res) {
+  console.log(req.body);
+  var user = req.body;
+  Model.User.findOneAndUpdate(
+    {
+      email: user._profile.email
+    },
+    {
+      username: user._profile.name,
+      logo: user._profile.profilePicURL,
+      email: user._profile.email,
+      pid: user._profile.id,
+      accessToken: user._token.accessToken,
+      idToken: user._token.idToken
+    },
+    {
+      upsert: true, 
+      new: true,
+      setDefaultsOnInsert: true
+    },
+    function(err, doc){
+      if(err){
+        console.log(err)
+      }
+      else{
+        res.json(doc)
+      }
+    }
+  )
+
+  // newCommand.save(function(err, doc) {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  //   else {
+  //     res.send(doc);
+  //   }
+  // });
+});
 
 // Any non API GET routes will be directed to our React App and handled by React Router
 app.get("*", function(req, res) {
