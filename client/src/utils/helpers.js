@@ -55,6 +55,14 @@ const helpers = {
    
   },
 
+  postUser: function(email) {
+    return axios.post('/api/user/', email)
+    .then(function(results){
+      console.log("axios results postUser:", results)
+      return results;
+    })
+  },
+
   // Returns the Sprite doc from our database
   getSprite: function(id) {
     return axios.get(`/api/sprite/${id}`)
