@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chatbox from './Dashboard/Chatbox';
-
+import canView from './Dashboard/canView';
 
 class Dashboard extends Component {
 
