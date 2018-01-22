@@ -1,7 +1,5 @@
 // Include React as a dependency
 import React, { Component } from 'react';
-import BotSettings from '../components/Settings/BotSettings';
-import SpriteSettings from '../components/Settings/SpriteSettings';
 import '../components/Settings/Settings.css';
 import helpers from '../utils/helpers';
 
@@ -57,13 +55,17 @@ class Settings extends Component {
     const botSettings = {
       name: this.state.name,
       oAuth: this.state.oAuth,
-      channels: this.state.channel
+      channels: "#"+this.state.channel
     }
     
-    // TODO: REPLACE STRING WITH PROP ID
+
     helpers.updateSettings(this.props.user._id, this.input.value, botSettings)
     .then((data) => {
       console.log("settings updated", data);
+
+      // update Main with new info from database
+      this.props.getUser();
+
       this.setState({ 
         name: "",
         oAuth: "",
@@ -71,21 +73,9 @@ class Settings extends Component {
         isSubmitting: false,
         isSubmitted: true
       });
-      //TODO: Show notification popup that settings have been saved
       alert("Settings saved!");
     })
 
-    // // then
-    // setTimeout(() => {
-    //   // Completed of async action, set loading state back
-    //   this.setState({ 
-    //     name: "",
-    //     oAuth: "",
-    //     channel: "",
-    //     isSubmitting: false,
-    //     isSubmitted: true
-    //   });
-    // }, 2000);
   }
 
   renderContainer = () => {
@@ -115,7 +105,8 @@ class Settings extends Component {
 
               <div className="md-form">
                 <h4><strong>oAuth Token:</strong></h4>
-                <p>(Copy and paste from <a href="https://twitchapps.com/tmi/" target="_blank">Twitch Apps</a> using the account you entered for bot name, including "oauth:")</p>
+                <p>(Copy and paste from <a href="https://twitchapps.com/tmi/" target="_blank" rel="noopener noreferrer">
+                Twitch Apps</a> using the account you entered for bot name, including "oauth:")</p>
                 <input 
                   type="text"
                   value={this.state.oAuth}
@@ -169,8 +160,8 @@ class Settings extends Component {
               <img className="spriteImg" src={sprite.img} alt={sprite.name} />
               
               <div>
-                <label className="spriteLabel" htmlFor={`sprite-${sprite.id}`}>
-                  <input type="radio" ref={(input) => this.input = input} value={sprite.id} id={`sprite-${sprite.id}`} />
+                <label className="spriteLabel" htmlFor={`sprite-${sprite.sid}`}>
+                  <input type="radio" ref={(input) => this.input = input} value={sprite.id} id={`sprite-${sprite.sid}`} />
                 </label>
               </div>
 

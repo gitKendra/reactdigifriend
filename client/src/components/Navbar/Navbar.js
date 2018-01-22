@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 
 class Navbar extends Component {
@@ -85,7 +85,7 @@ class Navbar extends Component {
             </div>
 
             <div className="navbar-nav">
-                <img style={styles.avatar} src={this.props.user === undefined ? this.state.avatar : this.props.user.profilePicURL} />
+                <img style={styles.avatar} alt="avatar" src={this.props.user === undefined ? this.state.avatar : this.props.user.profilePicURL} />
                 {this.renderLog()}
 
             </div>

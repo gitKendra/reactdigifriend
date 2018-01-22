@@ -5,7 +5,6 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
   pid: {
     type: String,
-    unique: true
   },
   username: {
     type: String

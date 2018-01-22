@@ -66,16 +66,6 @@ const helpers = {
     })
   },
 
-  // Returns the Sprite doc from our database
-  getSprite: function(id) {
-
-    return axios.get(`/api/sprite/${id}`)
-      .then(function(results) {
-        console.log("axios results getSprite:", results);
-        return results;
-      });
-  },
-
   getAllSprites: function() {
     
     return axios.get("/api/sprite")
@@ -84,7 +74,20 @@ const helpers = {
         return results;
       });
   },
+
+
+  // Returns the Sprite doc from our database given the sprite id
+  getSprite: function(id) {
+
+    return axios.get(`/api/sprite/${id}`)
+      .then(function(results) {
+        console.log("axios results getSprite:", results);
+        return results;
+      });
+  }
+
 };
+
 
 // We export the helpers function
 export default helpers;
