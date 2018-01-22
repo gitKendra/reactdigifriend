@@ -36,9 +36,9 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
 	canvas.setAttribute('id', 'canvas');
 	canvasDiv.appendChild(canvas);
 	
-	// if(typeof G_vmlCanvasManager != 'undefined') {
-	// 	canvas = G_vmlCanvasManager.initElement(canvas);
-	// }
+	if(typeof G_vmlCanvasManager != 'undefined') {
+		canvas = G_vmlCanvasManager.initElement(canvas);
+	}
 	context = canvas.getContext("2d"); // Grab the 2d canvas context
 	// Note: The above code is a workaround for IE 8and lower. Otherwise we could have used:
 	//     context = document.getElementById('canvas').getContext("2d");
