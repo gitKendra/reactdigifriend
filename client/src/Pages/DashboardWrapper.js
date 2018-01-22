@@ -200,7 +200,8 @@ class DashboardWrapper extends Component{
                 :
                 <button className="btn btn-success" onClick={this.showComBtn}>
                     <Link to={"/dashboard"}>Back to Dashboard</Link>
-                </button>               
+                </button> 
+                          
             }
                 
                 <Route 
