@@ -14,11 +14,7 @@ class AddCommand extends Component {
     this.setState({ collapse: !this.state.collapse });
   }
 
-  // Whenever we detect ANY change in the textbox, we register it.
   handleChange = (event) => {
-    // Here we create syntax to capture any change in text to the AddCommand terms (pre-search).
-    // See this Stack Overflow answer for more details:
-    // http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
     var newState = {};
     newState[event.target.id] = event.target.value;
     this.setState(newState);
@@ -33,44 +29,46 @@ class AddCommand extends Component {
 
   renderForm = () => {
     return(
-    <div className="container">
-    <div className="card mt-4">
-      <div className="card-body">
-        <div className="text-center">
-          <h4 className="font-up mb-0">Add Command</h4>
-        </div>
-<form onSubmit={this.handleSubmit}>
-          <div className="md-form">
+   
+      <div className="card mt-4">
+        <div className="card-body">
+
+          <div className="text-center">
+            <h4 className="font-up mb-0">Add Command</h4>
+          </div>
+
+          <form onSubmit={this.handleSubmit}>
+            <div className="md-form">
+                <input 
+                  type="text"
+                  value={this.state.name}
+                  className="form-control"
+                  id="name"
+                  onChange={this.handleChange}
+                  placeholder="Command name"
+                  required
+                />
+            </div>
+
+            <div className="md-form">
               <input 
                 type="text"
-                value={this.state.name}
+                value={this.state.message}
                 className="form-control"
-                id="name"
+                id="message"
                 onChange={this.handleChange}
-                placeholder="Command name"
+                placeholder="Command message"
                 required
               />
-          </div>
+            </div>
 
-          <div className="md-form">
-            <input 
-              type="text"
-              value={this.state.message}
-              className="form-control"
-              id="message"
-              onChange={this.handleChange}
-              placeholder="Command message"
-              required
-            />
-          </div>
-
-          <div className="text-center pull-right">
-              <button className="btn btn-sm btn-deep-orange">Save</button>
-          </div>
-</form>
+            <div className="text-center pull-right">
+                <button className="btn btn-deep-orange">Save</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    </div>
+
     )
   }
 

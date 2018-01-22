@@ -97,9 +97,9 @@ app.delete("/api/saved/:id", function(req, res) {
   });
 });
 
-// Get document info about a specific sprite
+// Get document about a specific sprite
 app.get("/api/sprite/:id", function(req, res) {
-  Model.Sprite.find({ id : req.params.id })
+  Model.Sprite.findOne({ id : req.params.id })
   .exec(function(err, doc){
     if(err) {
       console.log(err);
@@ -110,7 +110,20 @@ app.get("/api/sprite/:id", function(req, res) {
   });
 });
 
-// Get document info about a specific user
+// Get all sprites from db
+app.get("/api/sprite", function(req, res) {
+  Model.Sprite.find({})
+  .exec(function(err, doc){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.json(doc);
+    }
+  });
+});
+
+// Get document about a specific user
 app.get("/api/user/:id", function(req, res) {
   Model.User.findById(req.params.id)
   .exec(function(err, doc){
@@ -124,20 +137,45 @@ app.get("/api/user/:id", function(req, res) {
 })
 
 // Add user to database
-app.post("/api/user/", function(req, res) {
-  console.log(req.body);
+app.post("/api/user", function(req, res) {
+
   var user = req.body;
+
   Model.User.findOneAndUpdate(
     {
       email: user._profile.email
-    },
-    {
+    },{
       username: user._profile.name,
       logo: user._profile.profilePicURL,
       email: user._profile.email,
       pid: user._profile.id,
       accessToken: user._token.accessToken,
       idToken: user._token.idToken
+    },{
+      upsert: true, 
+      new: true,
+      setDefaultsOnInsert: true
+    }, function(err, doc) {
+      if(err){
+        console.log(err)
+      }
+      else{
+        res.json(doc)
+      }
+    }
+  )
+});
+
+// Update user settings
+app.post("/api/user/:id/settings/", function(req, res){
+  console.log(req.body);
+  Model.User.findOneAndUpdate(
+    {
+      _id: req.params.id
+    },
+    {
+      sprite_id: req.body.sid,
+      botSettings: req.body.bot
     },
     {
       upsert: true, 
@@ -153,15 +191,6 @@ app.post("/api/user/", function(req, res) {
       }
     }
   )
-
-  // newCommand.save(function(err, doc) {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  //   else {
-  //     res.send(doc);
-  //   }
-  // });
 });
 
 // Any non API GET routes will be directed to our React App and handled by React Router
