@@ -1,11 +1,58 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css';
 
 class Navbar extends Component {
 
+    state = {
+        avatar: 'https://maxcdn.icons8.com/Share/icon/p1em/users//gender_neutral_user1600.png',
+        name: ''
+    }
+    
+    componentDidMount(){
+        console.log(this.props);
+        if(this.props.user !== undefined && this.props.user.profilePicURL === undefined){
+            this.setState({
+                avatar: this.props.user.profilePicURL,
+                name: this.props.user.name
+            })
+        }
+        else if(this.props.user !== undefined && this.props.user.name !== undefined){
+            this.setState({
+                name: this.props.name
+            })
+        }
+    }
+
+    renderLog = () => {
+        if(this.props.user === undefined) {
+            return(
+                <NavLink to="/login" className="navLink mt-2 ml-2">              
+                    Login
+                </NavLink>
+            )}
+        else{
+            return(
+                <div className="navLink mt-2 ml-2" onClick={this.props.logout}>Logout</div>
+            )
+        }
+    }
+
+    
     render() {
     
+        const styles = {
+            avatar: {
+                background: '#eceff1',
+                boxShadow: '0 0 12px rgba(0,0,0,0.5)',
+                border: '3px solid #fff',
+                borderRadius: '50%',
+                height: '2.7em',
+                width: '2.7em',
+                zIndex: '1'
+              }
+        }
+        
       return (
         
         <nav className="navbar navbar-expand-md navbar-dark indigo">
@@ -38,10 +85,9 @@ class Navbar extends Component {
             </div>
 
             <div className="navbar-nav">
-                <NavLink to="/login" className="navLink">
-                    <span className="user-image"><i className="fa fa-user-circle-o" aria-hidden="true"></i></span>
-                    Login
-                </NavLink>
+                <img style={styles.avatar} src={this.props.user === undefined ? this.state.avatar : this.props.user.profilePicURL} />
+                {this.renderLog()}
+
             </div>
         </nav>
       );

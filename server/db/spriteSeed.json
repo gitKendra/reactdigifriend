@@ -1,0 +1,17 @@
+{
+    "id": 1,
+    "name": "Bob",
+    "img": "https://image.ibb.co/bCQyib/sprite1.png",
+    "commands": [
+        {
+            "name": "jump",
+            "message": "I'm a jumping bean",
+            "action": "jump" 
+        },
+        {
+            "name": "love",
+            "message": "I can feel the love <3",
+            "action": "love" 
+        }
+    ]
+}

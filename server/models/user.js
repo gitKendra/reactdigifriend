@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  twitchId: {
+  pid: {
     type: String,
     unique: true
   },
@@ -20,6 +20,9 @@ var UserSchema = new Schema({
     type: String
   },
   refreshToken: {
+    type: String
+  },
+  idToken: {
     type: String
   },
   botSettings: {

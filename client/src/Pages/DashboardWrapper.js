@@ -12,7 +12,7 @@ class DashboardWrapper extends Component{
     state = {
         username: "",
         logo: "",
-        id: "5a58fde1b22f3594888cd306",
+        id: "",
         channel: "",
         client: null,
         userCommands: [],
@@ -21,13 +21,19 @@ class DashboardWrapper extends Component{
     }
 
     componentDidMount() {
+        console.log(this.props);
+        // Don't do anything if user isn't logged in
+
         // Get user data from db to display customized dashboard
         // user id on KK laptop: 5a5a4271bd5601fb56ccffb7
         //user id on kk home: 5a58fde1b22f3594888cd306
-        this.loadBotClient();
-        this.getSpriteCommands();
-        this.getUserCommands();
-        this.setState({ comBtnVisible: true })
+        if(this.props.isLoggedIn){
+            this.setState({ id: this.props.user._id, comBtnVisible: true }, () => {
+                this.loadBotClient();
+                this.getSpriteCommands();
+                this.getUserCommands(); 
+            })
+        }
         
     }
 
@@ -41,7 +47,7 @@ class DashboardWrapper extends Component{
                 username: user.data.username,
                 logo: user.data.logo,
                 // id: user.data._id,
-                channel: botSettings.channels[0].substring(1)
+                channel: botSettings.channels[0]
             });
 
             // Create and setup bot
@@ -146,7 +152,7 @@ class DashboardWrapper extends Component{
 
     // Retrieves sprite doc then sets state based on their commands
     getSpriteCommands = () => {
-        helpers.getSprite(this.state.id).then(function(dbSprite){
+        helpers.getSprite(this.state.id).then((dbSprite) => {
             // set the sprite commands state
             console.log("retrieved Sprite doc", dbSprite);
         });
@@ -186,44 +192,56 @@ class DashboardWrapper extends Component{
         this.setState({ comBtnVisible: false })
     }
 
+    renderNotLoggedIn = () => {
+        return(
+            <div >
+                <h4 className="text-center">You must be logged in to access your settings.</h4>
+            </div>
+        )
+      }
+
     render(){
 
         const {match} = this.props;
 
-        return(             
-            <div>
-                <Navbar />
-                { this.state.comBtnVisible ?
-                <button className="btn btn-success" onClick={this.showDashBtn}>
-                    <Link to={`${match.url}/commands`}>List of commands</Link>
-                </button>
-                :
-                <button className="btn btn-success" onClick={this.showComBtn}>
-                    <Link to={"/dashboard"}>Back to Dashboard</Link>
-                </button> 
-                          
-            }
-                
-                <Route 
-                    exact path={match.url} 
-                    render={() => (
-                        this.renderDashboard()
-                    )}
-                />
-                <Route 
-                    path={`${match.url}/commands`} 
-                    render={ props => 
-                        <Commands 
-                            delCom={this.delCommand} 
-                            addCom={this.addCommand} 
-                            userCom={this.state.userCommands} 
-                            {...props} 
-                        />
-                    }
-                />
-            </div>
-        );
+        // Only render the dashboard if user is logged in
+        if(this.props.isLoggedIn){
+            return(             
+                <div>
 
+                    { this.state.comBtnVisible ?
+                    <button className="btn btn-success" onClick={this.showDashBtn}>
+                        <Link to={`${match.url}/commands`}>List of commands</Link>
+                    </button>
+                    :
+                    <button className="btn btn-success" onClick={this.showComBtn}>
+                        <Link to={"/dashboard"}>Back to Dashboard</Link>
+                    </button>               
+                }
+                    
+                    {/* Add Subroute to current route*/}
+                    <Route 
+                        exact path={match.url} 
+                        render={() => (
+                            this.renderDashboard()
+                        )}
+                    />
+                    <Route 
+                        path={`${match.url}/commands`} 
+                        render={ props => 
+                            <Commands 
+                                delCom={this.delCommand} 
+                                addCom={this.addCommand} 
+                                userCom={this.state.userCommands} 
+                                {...props} 
+                            />
+                        }
+                    />
+                </div>
+            );
+        }
+        // TODO Show message if not logged in
+        return this.renderNotLoggedIn();
     }
 }
 
