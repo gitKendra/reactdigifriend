@@ -38,15 +38,8 @@ const helpers = {
     });
   },
 
-  // twitchLogin: function() {
-  //   return axios.get("/auth/twitch")
-  //   .then(function(results){
-  //     console.log("axios results", results);
-  //     return results;
-  //   })
-  // },
-
   getUser: function(id) {
+
     return axios.get(`/api/user/${id}`)
     .then(function(results){
       console.log("axios results getUser:", results);
@@ -56,18 +49,38 @@ const helpers = {
   },
 
   postUser: function(email) {
-    return axios.post('/api/user/', email)
+
+    return axios.post('/api/user', email)
     .then(function(results){
       console.log("axios results postUser:", results)
       return results;
     })
   },
 
+  updateSettings: function(uid, sid, bot) {
+
+    return axios.post(`/api/user/${uid}/settings/`, {sid, bot})
+    .then(function(results){
+      console.log("axios results updateSettings", results)
+      return results;
+    })
+  },
+
   // Returns the Sprite doc from our database
   getSprite: function(id) {
+
     return axios.get(`/api/sprite/${id}`)
       .then(function(results) {
         console.log("axios results getSprite:", results);
+        return results;
+      });
+  },
+
+  getAllSprites: function() {
+    
+    return axios.get("/api/sprite")
+      .then(function(results) {
+        console.log("axios results getSprites:", results);
         return results;
       });
   },
