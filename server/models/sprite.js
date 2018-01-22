@@ -3,9 +3,10 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var SpriteSchema = new Schema({
-  id: {
-    type: Number,
-    unique: true
+  sid: {
+    type: String,
+    unique: true,
+    default: 1
   },
   name: {
     type: String

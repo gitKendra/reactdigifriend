@@ -4,8 +4,6 @@ import AddCommand from "./Commands/AddCommand";
 import Saved from "./Commands/Saved";
 import './Commands/Commands.css';
 
-// Include the helpers for making API calls
-import helpers from "../utils/helpers";
 
 // Create the Commands component
 class Commands extends Component {

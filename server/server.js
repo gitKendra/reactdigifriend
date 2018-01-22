@@ -57,19 +57,6 @@ app.get("/api/saved/user/:id", function(req, res) {
     });
 });
 
-// Route that returns the Sprite doc from database
-app.get("/api/sprite/:id", function(req, res) {
-  Model.Sprite.find({_id : req.params.id})
-    .exec(function(err, doc) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.send(doc);
-      }
-    });
-});
-
 // Route to add command to saved list
 app.post("/api/saved", function(req, res) {
   var newCommand = new Model.Command(req.body);
@@ -97,34 +84,37 @@ app.delete("/api/saved/:id", function(req, res) {
   });
 });
 
-// Get document about a specific sprite
-app.get("/api/sprite/:id", function(req, res) {
-  Model.Sprite.findOne({ id : req.params.id })
-  .exec(function(err, doc){
-    if(err) {
-      console.log(err);
-    }
-    else {
-      res.json(doc);
-    }
-  });
-});
-
 // Get all sprites from db
 app.get("/api/sprite", function(req, res) {
+  console.log("getting all sprites");
   Model.Sprite.find({})
   .exec(function(err, doc){
     if(err) {
       console.log(err);
     }
     else {
-      res.json(doc);
+      res.send(doc);
+    }
+  });
+});
+
+// Get document about a specific sprite
+app.get("/api/sprite/:sid", function(req, res) {
+  console.log("find sprite with sid", req.params.sid);
+  Model.Sprite.findOne({ sid : req.params.sid })
+  .exec(function(err, doc){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.send(doc);
     }
   });
 });
 
 // Get document about a specific user
 app.get("/api/user/:id", function(req, res) {
+  console.log("User id: " + req.params.id);
   Model.User.findById(req.params.id)
   .exec(function(err, doc){
     if(err) {
@@ -136,7 +126,7 @@ app.get("/api/user/:id", function(req, res) {
   });
 })
 
-// Add user to database
+// Add user to database or find existing
 app.post("/api/user", function(req, res) {
 
   var user = req.body;
@@ -187,6 +177,7 @@ app.post("/api/user/:id/settings/", function(req, res){
         console.log(err)
       }
       else{
+        console.log(doc)
         res.json(doc)
       }
     }

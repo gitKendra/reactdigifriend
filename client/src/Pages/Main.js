@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Navbar from '../components/Navbar/Navbar';
 import Jumbotron from '../components/Jumbotron';
@@ -20,6 +20,14 @@ class Main extends Component {
   }
 
   nodes = {}
+
+  getUser = () => {
+    helpers.getUser(this.state.dbUser._id)
+    .then( (user) => {
+      console.log("got user", user);
+      this.setState({ dbUser: user.data })
+    })
+  }
 
   authFunctions = {
     setNodeRef: (provider, node) => {
@@ -102,6 +110,7 @@ class Main extends Component {
                 <DashboardWrapper
                   isLoggedIn={this.state.logged}
                   user={this.state.dbUser}
+                  getUser={this.getUser}
                   {...props} 
                 />
               }
@@ -113,6 +122,7 @@ class Main extends Component {
                 <Settings
                   isLoggedIn={this.state.logged}
                   user={this.state.dbUser}
+                  getUser={this.getUser}
                   {...props} 
                 />
               }

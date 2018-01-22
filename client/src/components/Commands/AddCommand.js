@@ -30,7 +30,7 @@ class AddCommand extends Component {
   renderForm = () => {
     return(
    
-      <div className="card mt-4">
+      <div className="card mt-4 mx-3">
         <div className="card-body">
 
           <div className="text-center">

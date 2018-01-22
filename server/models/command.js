@@ -11,10 +11,6 @@ var CommandSchema = new Schema({
   userId: {
     type: String,
     default: null
-  },
-  spriteId: {
-    type: String,
-    default: null
   }
 });
 

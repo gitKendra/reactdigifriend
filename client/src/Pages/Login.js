@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
-import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import SocialButton from '../components/SocialButton'
-import UserCard from '../components/UserCard'
+// import UserCard from '../components/UserCard'
 
-import helpers from '../utils/helpers';
+// import helpers from '../utils/helpers';
 
 
 class Login extends Component {
