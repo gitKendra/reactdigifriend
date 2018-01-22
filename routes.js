@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-import {PostData} from '../../services/PostData';
+import {PostData} from 'client/src/postData.js';
 import {Redirect} from 'react-router-dom';
-import './Welcome.css';
 
 class Welcome extends Component {
 constructor(props) {

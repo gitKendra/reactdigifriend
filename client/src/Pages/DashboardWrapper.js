@@ -203,6 +203,7 @@ class DashboardWrapper extends Component{
     render(){
 
         const {match} = this.props;
+
         // Only render the dashboard if user is logged in
         if(this.props.isLoggedIn){
             return(             
@@ -241,7 +242,6 @@ class DashboardWrapper extends Component{
         }
         // TODO Show message if not logged in
         return this.renderNotLoggedIn();
-
     }
 }
 
