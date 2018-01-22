@@ -1,17 +1,16 @@
 {
-    "id": 1,
+    "sid": "1",
     "name": "Bob",
     "img": "https://image.ibb.co/bCQyib/sprite1.png",
-    "commands": [
-        {
+    "commands": [{
             "name": "jump",
             "message": "I'm a jumping bean",
-            "action": "jump" 
+            "action": "jump"
         },
         {
             "name": "love",
             "message": "I can feel the love <3",
-            "action": "love" 
+            "action": "love"
         }
     ]
 }

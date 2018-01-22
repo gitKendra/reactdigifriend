@@ -1,3 +1,7 @@
+import React, { Component } from 'react';
+import ReactDOM from "react-dom";
+import jump from './canvas/jump';
+
 class CanvasComponent extends React.Component {
     componentDidMount() {
         this.updateCanvas();
