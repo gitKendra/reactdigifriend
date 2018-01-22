@@ -29,19 +29,17 @@ function updateFPS() {
 }
 function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
 {
-	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
+	// Create the canvas
 	canvas = document.createElement('canvas');
 	canvas.setAttribute('width', canvasWidth);
 	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
 	canvasDiv.appendChild(canvas);
 	
-	if(typeof G_vmlCanvasManager != 'undefined') {
-		canvas = G_vmlCanvasManager.initElement(canvas);
-	}
+	// if(typeof G_vmlCanvasManager != 'undefined') {
+	// 	canvas = G_vmlCanvasManager.initElement(canvas);
+	// }
 	context = canvas.getContext("2d"); // Grab the 2d canvas context
-	// Note: The above code is a workaround for IE 8and lower. Otherwise we could have used:
-	//     context = document.getElementById('canvas').getContext("2d");
 	
 	canvas.width = canvas.width; // clears the canvas 
 	context.fillText("loading...", 40, 140);
@@ -55,10 +53,6 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
 	loadImage("leftArm-jump");
 	loadImage("legs-jump");
 	loadImage("rightArm-jump");
-	// loadImage("jump1");
-	// loadImage("jump2");
-	// loadImage("jump3");
-	// loadImage("jump4");
 }
 
 function loadImage(name) {
@@ -97,12 +91,6 @@ function redraw() {
   if (jumping) {
 	y -= jumpHeight;
 	}
-
-	// if (jumping) {
-	// 	context.drawImage(images["jump2"], x + 40, y - 42 - breathAmt);
-	// 	} else {
-	// 	context.drawImage(images["jump1"], x + 40, y - 42 - breathAmt);
-	// 	}
 
   if (jumping) {
 	context.drawImage(images["leftArm-jump"], x + 40, y - 42 - breathAmt);
@@ -199,3 +187,5 @@ function land() {
   jumping = false;
 
 }
+
+export default jump;

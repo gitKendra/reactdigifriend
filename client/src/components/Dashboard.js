@@ -7,12 +7,19 @@ class Dashboard extends Component {
 	state = {
 		showCommands: false,
 		showChat: true
-	}
+  }
 
   render() {
+    
+    var style = {
+    float:'right',
+    width:'500',
+    height:'500'
+  }
+
     return (
       <div className="container">
-				{/* INSERT CANVAS */}
+				<div style={style} id="canvasDiv"></div>
 				
         {((this.props.botClient !== null) && <Chatbox channel={this.props.channel} botClient={this.props.botClient} /> )}
 
