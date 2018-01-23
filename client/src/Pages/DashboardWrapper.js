@@ -52,8 +52,6 @@ class DashboardWrapper extends Component{
         console.log("Loading BotClient");
         const userCommands = this.state.userCommands;
         const spriteCommands = this.state.spriteCommands;
-        console.log("user commands:", userCommands);
-        console.log("sprite commands:", spriteCommands);
 
         // Create and setup bot
         var botClient = tmi.client({
@@ -107,22 +105,7 @@ class DashboardWrapper extends Component{
                 }
 
             }
-            
-            // switch(msg.command){
-            //     // Pet commands
-            //     case "!digi":
-            //         // console.log("Pet command triggered");
-            //         // find msg.action in database and
-            //         response = performSpriteAction(channel, msg.action, userstate.username);
-            //         break;
-            //     case "!test":
-            //         console.log("Test message triggered");
-            //         response = "This is a test message."
-            //         break;
-            //     default:
-            //         console.log("No valid commands given");
-            //         break;
-            // }
+
             if(response === undefined){
                 return;
             }
@@ -147,40 +130,6 @@ class DashboardWrapper extends Component{
             }
 
             return parsedMessage;
-        }
-
-        var performSpriteAction = (channel, action, username) => {
-            
-            var chatMessage;
-
-            if(action !== undefined) {
-                switch(action){
-                    case "pet":
-                        console.log(username + " pet the dog.");
-                        chatMessage = "pet the dog."
-                        break;
-                    case "play":
-                        console.log(username + " played with the dog.");
-                        chatMessage = "played with the dog."
-                        break;	
-                    case "feed":
-                        console.log(username + " fed the dog.");
-                        chatMessage = "fed the dog."
-                        break;					
-                    case "treat":
-                        console.log(username + " gave the dog a treat.");
-                        chatMessage = "gave the dog a treat."
-                        break;		
-                    default :
-                        break;					
-                }
-            }
-            else {
-                console.log("Null action");
-                chatMessage = "No pet action taken";
-            }
-
-            return chatMessage;
         }
     }
 
