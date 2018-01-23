@@ -36,9 +36,6 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
 	canvas.setAttribute('id', 'canvas');
 	canvasDiv.appendChild(canvas);
 	
-	// if(typeof G_vmlCanvasManager != 'undefined') {
-	// 	canvas = G_vmlCanvasManager.initElement(canvas);
-	// }
 	context = canvas.getContext("2d"); // Grab the 2d canvas context
 	
 	canvas.width = canvas.width; // clears the canvas 

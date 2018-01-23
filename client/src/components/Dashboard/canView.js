@@ -8,7 +8,7 @@ class CanvasComponent extends React.Component {
     }
     updateCanvas() {
         const ctx = this.refs.canvas.getContext('2d');
-        ctx.fillRect(0,0, 100, 100);
+        ctx.fillRect(0,255,0);
     }
     render() {
         return (
