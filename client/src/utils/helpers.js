@@ -84,6 +84,16 @@ const helpers = {
         console.log("axios results getSprite:", results);
         return results;
       });
+  },
+
+  getUserCom: function(id, name) {
+    
+    var where = { id: id, name: name }
+    return axios.get("/api/user/commands", where)
+      .then(function(results) {
+        console.log("axios results getSpriteCom:", results);
+        return results;
+      });
   }
 
 };
