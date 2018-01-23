@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
-import jump from './canvas/jump';
+import jump from '../canvas/jump';
 
 class CanvasComponent extends React.Component {
     componentDidMount() {
@@ -16,4 +16,5 @@ class CanvasComponent extends React.Component {
         );
     }
 }
-ReactDOM.render(<CanvasComponent/>, document.getElementById('canvasDiv'));
+// ReactDOM.render(<CanvasComponent/>, document.getElementById('canvasDiv'));
+export default CanvasComponent;

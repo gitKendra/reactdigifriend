@@ -184,6 +184,19 @@ app.post("/api/user/:id/settings/", function(req, res){
   )
 });
 
+// Gets the message that corresponds to the command name
+app.get("/api/user/commands", function(req, res){
+  Model.Sprite.findOne({ userId: req.body.id, name: req.body.name },
+  function(err, doc){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.send(doc.message)
+    }
+  })
+});
+
 // Any non API GET routes will be directed to our React App and handled by React Router
 app.get("*", function(req, res) {
   if ( process.env.NODE_ENV === 'production' ) {

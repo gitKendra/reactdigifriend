@@ -13,7 +13,7 @@ class Settings extends Component {
     isSubmitting: false,
     isSubmitted: false,
     sprite: [],
-    selectedSprite: ""
+    selectedSprite: "1"
   }
 
   componentDidMount(){
@@ -25,6 +25,10 @@ class Settings extends Component {
       // pull sprite info from databse
       this.getSprites();
     }
+  }
+
+  handleOptionChange = (event) => {
+    this.setState({ selectedSprite: event.target.value })
   }
 
   getSprites = () => {
@@ -44,8 +48,7 @@ class Settings extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Submit/Save button clicked");
-    console.log(this.props.user._id);
+
     this.setState({ 
       channel: this.state.channel,
       isSubmitting: true,
@@ -59,7 +62,7 @@ class Settings extends Component {
     }
     
 
-    helpers.updateSettings(this.props.user._id, this.input.value, botSettings)
+    helpers.updateSettings(this.props.user._id, this.state.selectedSprite, botSettings)
     .then((data) => {
       console.log("settings updated", data);
 
@@ -161,7 +164,9 @@ class Settings extends Component {
               
               <div>
                 <label className="spriteLabel" htmlFor={`sprite-${sprite.sid}`}>
-                  <input type="radio" ref={(input) => this.input = input} value={sprite.id} id={`sprite-${sprite.sid}`} />
+                  <input type="radio" value={sprite.id} id={`sprite-${sprite.sid}`} 
+                  checked={this.state.selectedSprite === sprite.sid}
+                  onChange={this.handleOptionChange} />
                 </label>
               </div>
 

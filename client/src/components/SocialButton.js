@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import SocialLogin from 'react-social-login'
+import gbtn from './btn_google.png'
 
 class Button extends Component {
     static propTypes = {
@@ -10,19 +11,10 @@ class Button extends Component {
   
     render () {
       const { children, triggerLogin, triggerLogout, ...props } = this.props
-      const style = {
-        background: '#eee',
-        border: '1px solid black',
-        borderRadius: '3px',
-        display: 'inline-block',
-        margin: '5px',
-        padding: '10px 20px'
-      }
-  
+
       return (
-        <div onClick={triggerLogin} style={style} {...props}>
-          { children }
-        </div>
+          <img className="mx-auto d-block" src={gbtn} alt="Google Sign in" onClick={triggerLogin}  {...props}/>
+
       )
     }
   }

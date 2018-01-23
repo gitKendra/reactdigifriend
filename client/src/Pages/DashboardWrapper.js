@@ -24,19 +24,36 @@ class DashboardWrapper extends Component{
         // user id on KK laptop: 5a5a4271bd5601fb56ccffb7
         //user id on kk home: 5a58fde1b22f3594888cd306
         this.setState({ id: this.props.user._id, comBtnVisible: true }, () => {
-            // this.props.getUser();
+            console.log("Set dbw state with id", this.state.id);
 
             if(this.props.isLoggedIn && this.props.user.botSettings !== undefined){
             
-                this.loadBotClient();
-                this.getSpriteCommands();
-                this.getUserCommands(); 
+                // get user saved commands and update state
+                helpers.getSaved(this.props.user._id)
+                .then((commandData) => {
+
+                    this.setState({ userCommands: commandData.data }, () => {
+                        console.log("set dbw state with user commands", this.state.userCommands);
+                        // then get sprite commands and update state
+                        helpers.getSprite(this.props.user.sprite_id)
+                        .then((dbSprite) => {
+                            this.setState({ spriteCommands: dbSprite.data.commands}, () =>{
+                                console.log("set dbw state with sprite commands", this.state.spriteCommands);
+                                this.loadBotClient()
+                            });
+                        });
+                    });
+                });
             }
         })
-        
     }
 
     loadBotClient = () => {
+        console.log("Loading BotClient");
+        const userCommands = this.state.userCommands;
+        const spriteCommands = this.state.spriteCommands;
+        console.log("user commands:", userCommands);
+        console.log("sprite commands:", spriteCommands);
 
         // Create and setup bot
         var botClient = tmi.client({
@@ -50,12 +67,8 @@ class DashboardWrapper extends Component{
 
         // Connect to chat server
         botClient.connect().then((data) => {
-            console.log("bot connecting", data);
-            botClient.join(this.state.channel, (data) =>{
-                console.log("bot joining", data);
-            })
-                
-            });
+            botClient.join(this.state.channel)  
+        });
         
         this.setState({ botClient: botClient });
 
@@ -63,30 +76,66 @@ class DashboardWrapper extends Component{
         botClient.on("chat", function (channel, userstate, message, self) {
             // Don't listen to messages from bot
             if(self) return;
-    
-            var msg = parseMessage(message);
-            var response;
-            switch(msg.command){
-                // Pet commands
-                case "!pet":
-                    console.log("Pet command triggered");
-                    response = performPetAction(channel, msg.action, userstate.username);
-                    break;
-                case "!test":
-                    console.log("Test message triggered");
-                    response = "This is a test message."
-                    break;
-                default:
-                    console.log("No valid commands given");
-                    break;
+
+            // Check if message is a command
+            if(message[0] === '!'){
+
+                var msg = parseMessage(message);
+                var response;
+
+                //Check if it's a sprite command
+                if(msg.command.substring(0,5) === '!digi'){
+                    // Check if sprite command
+                    for(let i=0; i<spriteCommands.length; i++){
+                        console.log(msg.command.substring(5));
+                        if(spriteCommands[i].name === msg.command.substring(5)){
+                            response = "/me " + spriteCommands[i].message;
+                            // TODO: CALL ACTION ON CANVAS
+
+                            break;
+                        }
+                    }
+                }
+                else{
+                    // Check if it's a user custom command
+                    for(let i=0; i<userCommands.length; i++){
+                        if(userCommands[i].name === msg.command){
+                            response = userCommands[i].message;
+                            break;
+                        }
+                    }
+                }
+
             }
             
-            botClient.say(channel, `${userstate.username} ${response}`).then(function(data) {
-                // data returns [channel]
-            }).catch(function(err) {
-                console.log(err);
-            });
+            // switch(msg.command){
+            //     // Pet commands
+            //     case "!digi":
+            //         // console.log("Pet command triggered");
+            //         // find msg.action in database and
+            //         response = performSpriteAction(channel, msg.action, userstate.username);
+            //         break;
+            //     case "!test":
+            //         console.log("Test message triggered");
+            //         response = "This is a test message."
+            //         break;
+            //     default:
+            //         console.log("No valid commands given");
+            //         break;
+            // }
+            if(response === undefined){
+                return;
+            }
+            else{
+                botClient.say(channel, response).then(function(data) {
+                // botClient.say(channel, `${userstate.username} ${response}`).then(function(data) {
+                    // data returns [channel]
+                }).catch(function(err) {
+                    console.log(err);
+                });
+            }
         });
+        
         // Parse command key and action from chat message
         var parseMessage = (message) => {
         
@@ -100,7 +149,7 @@ class DashboardWrapper extends Component{
             return parsedMessage;
         }
 
-        var performPetAction = (channel, action, username) => {
+        var performSpriteAction = (channel, action, username) => {
             
             var chatMessage;
 
@@ -150,6 +199,7 @@ class DashboardWrapper extends Component{
         helpers.getSprite(this.props.user.sprite_id).then((dbSprite) => {
             // set the sprite commands state
             console.log("retrieved Sprite doc", dbSprite);
+            this.setState({ spriteCommands: dbSprite.data.commands});
         });
     }
 
