@@ -6,6 +6,7 @@ import Jumbotron from '../components/Jumbotron';
 import Login from './Login';
 import DashboardWrapper from './DashboardWrapper';
 import Settings from './Settings';
+import Home from './Home';
 
 import helpers from '../utils/helpers';
 
@@ -89,12 +90,17 @@ class Main extends Component {
       <Router>
         <div className="main-container">
           <Navbar user={this.state.user !== null && this.state.user._profile} logout={this.authFunctions.logout}  />
-          {!this.state.logged && <Jumbotron />}
+          
           <Switch>
 
+            <Route
+              exact path="/"
+              render={(props) =>
+                <Home {...props} />
+              }
+            />
             <Route 
               path="/login" 
-              // component={Login} 
               render={(props) => 
                 <Login
                   fn={this.authFunctions}
@@ -105,7 +111,6 @@ class Main extends Component {
             />
             <Route 
               path="/dashboard" 
-              // component={DashboardWrapper} 
               render={(props) => 
                 <DashboardWrapper
                   isLoggedIn={this.state.logged}
@@ -117,7 +122,6 @@ class Main extends Component {
             />
             <Route 
               path="/settings" 
-              // component={Settings} 
               render={(props) => 
                 <Settings
                   isLoggedIn={this.state.logged}

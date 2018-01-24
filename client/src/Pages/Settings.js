@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import '../components/Settings/Settings.css';
 import helpers from '../utils/helpers';
+import Jumbotron from '../components/Jumbotron';
 
 // Query Component Declaration
 class Settings extends Component {
@@ -84,15 +85,16 @@ class Settings extends Component {
   renderContainer = () => {
 
     return(
-      <div className="settings-container">
+      <div className="settings-container mb-4">
+      <form onSubmit={!this.state.isSubmitting ? this.handleSubmit : null}>
         <div className="card mt-4">
           <div className="card-body">
 
             <div className="text-center">
-              <h4 className="font-up mb-0">Bot Settings</h4>
+              <h4 className="font-up">Bot Settings</h4>
             </div>
-
-            <form onSubmit={!this.state.isSubmitting ? this.handleSubmit : null}>
+            <hr style={{'height': '12px', 'border': '0', 'box-shadow': 'inset 0 12px 12px -12px rgba(0, 0, 0, 0.5)'}}/>
+            
               <div className="md-form">
                 <h4 className=""><strong>Bot name:</strong></h4>
                 <input 
@@ -109,7 +111,7 @@ class Settings extends Component {
               <div className="md-form">
                 <h4><strong>oAuth Token:</strong></h4>
                 <p>(Copy and paste from <a href="https://twitchapps.com/tmi/" target="_blank" rel="noopener noreferrer">
-                Twitch Apps</a> using the account you entered for bot name, including "oauth:")</p>
+                Twitch Apps</a> using the account you entered for bot name)</p>
                 <input 
                   type="text"
                   value={this.state.oAuth}
@@ -133,10 +135,19 @@ class Settings extends Component {
                   required
                 />
               </div>
+            </div> 
+          </div>
+      
+          {/* Sprites */}
+          <div className="card mt-4">
+            <div className="card-body">
+              <div className="text-center mt-2">
+                <h4 className="font-up">Choose a DigiFriend</h4>
+              </div>
+              <hr style={{'height': '12px', 'border': '0', 'box-shadow': 'inset 0 12px 12px -12px rgba(0, 0, 0, 0.5)'}}/>
 
-              {/* Sprites */}
               <div className="container md-form">
-                <div className="spriteList row">
+                <div className="spriteList row justify-content-md-center">
                   {this.renderSprites()}
                 </div>
               </div>
@@ -144,9 +155,10 @@ class Settings extends Component {
               <div className="text-center pull-right">
                   <button className="btn btn-deep-orange">Save</button>
               </div>
-            </form>
+            
           </div>
         </div>
+        </form>
       </div>
     );
   }
@@ -186,23 +198,33 @@ class Settings extends Component {
   renderNotLoggedIn = () => {
     return(
         <div >
-            <h4 className="text-center">You must be logged in to access your settings.</h4>
+            <p className="text-center">You must be logged in to access your settings.</p>
         </div>
     )
   }
  
   render() {
 
-    if (!this.state.sprite){
-      return <p>Loading sprites....</p>
-    }
-    else if(this.props.isLoggedIn) {
-      return this.renderContainer();
-    }
-    // TODO Show message if not logged in
-    return this.renderNotLoggedIn();
+    const isLoggedIn = this.props.isLoggedIn;
+    return (
+      <div>
+        <Jumbotron
+          title="Settings"
+          body="Setup your bot and choose your digiFriend."
+        />
 
+      <div className="container">
+        { isLoggedIn ? (
+          this.renderContainer() 
+        ):(
+          this.renderNotLoggedIn() 
+        )}
+      </div>
+
+      </div>
+    )
   }
+
 };
 
 // Export the module back to the route

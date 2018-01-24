@@ -55,7 +55,7 @@ class Navbar extends Component {
         
       return (
         
-        <nav className="navbar navbar-expand-md navbar-dark indigo">
+        <nav className="navbar navbar-expand-md navbar-dark deep-purple darken-2">
             <NavLink className="navbar-brand" to="/">DigiFriend</NavLink>
 
             <button

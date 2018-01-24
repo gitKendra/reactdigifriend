@@ -2,14 +2,17 @@
 import React, { Component } from 'react'
 
 class Jumbotron extends Component{
-    
-  render() {
 
+   
+  render() {
+    
     return (
-      <div className="jumbotron">
-        <h2 className="text-center"><strong>Digital Friend & Bot</strong></h2>
-        <h3 className="text-center">Custom commands and an interactive digital friend for Twitch streamers.</h3>
+      <div className="container">
+      <div className="jumbotron mt-3">
+        <h2 className="text-center font-up"><strong>{this.props.title}</strong></h2>
+        <h4 className="text-center">{this.props.body}</h4>
       </div>
+    </div>
     )
   }
 };
