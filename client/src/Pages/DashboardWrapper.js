@@ -3,8 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Commands from '../components/Commands'
 import helpers from '../utils/helpers';
-import tmi from "tmi.js";
-
+import tmi from 'tmijs-es5';
 
 class DashboardWrapper extends Component{
 
