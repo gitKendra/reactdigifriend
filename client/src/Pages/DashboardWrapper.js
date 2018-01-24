@@ -21,8 +21,6 @@ class DashboardWrapper extends Component{
         // Don't do anything if user isn't logged in
 
         // Get user data from db to display customized dashboard
-        // user id on KK laptop: 5a5a4271bd5601fb56ccffb7
-        //user id on kk home: 5a58fde1b22f3594888cd306
         this.setState({ id: this.props.user._id, comBtnVisible: true }, () => {
             console.log("Set dbw state with id", this.state.id);
 
