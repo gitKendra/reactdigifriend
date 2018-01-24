@@ -1,9 +1,8 @@
-// Include React as a dependency
+
 import React, { Component } from 'react'
 
-// AddCommand Component Declaration
+
 class AddCommand extends Component {
-  // Here we set initial variables for the component to be blanks
   state = { 
     name: "",
     message: "",
@@ -20,7 +19,6 @@ class AddCommand extends Component {
     this.setState(newState);
   }
 
-  // This code handles the sending of the search terms to the parent Commands component
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.addCom(this.state.name, this.state.message);

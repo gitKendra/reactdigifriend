@@ -132,11 +132,14 @@ class DashboardWrapper extends Component{
     }
 
     // Retrieves the custom commands stored in the database for user
+    // Reloads bot to keep it up-to-date with most current db pull
     getUserCommands = () => {
         console.log("GET user commands");
         helpers.getSaved(this.props.user._id)
         .then((commandData) => {
-            this.setState({ userCommands: commandData.data });
+            this.setState({ userCommands: commandData.data }, () => {
+                this.loadBotClient();
+            });
             console.log("retrieved commands from db", commandData.data);
         });
     }
