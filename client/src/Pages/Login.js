@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import SocialButton from '../components/SocialButton'
+import Navbar from '../components/Navbar/Navbar';
+import Jumbotron from '../components/Jumbotron';
 // import UserCard from '../components/UserCard'
 
 // import helpers from '../utils/helpers';
@@ -10,17 +12,19 @@ class Login extends Component {
     render() {
 
         let children
+        const isLoggedIn = this.props.state.logged;
 
     if (this.props.state.logged) {
       children = 
-        <div className="container text-center mt-5">
-          <h4><strong>Welcome, {this.props.state.dbUser.username}!</strong></h4>
-          <h4>You have successfully logged in!</h4>
-          <p>If this is your first time loggin in or you would like to update your settings, 
-            please select the Settings link above to fill in your bot settings.</p>
-          <p>If you have already setup your bot, click on the Dashboard link above.</p>
+        <div>
+
+          <div className="container text-center mt-5">
+
+            <p>If this is your first time loggin in or you would like to update your settings, 
+              please select the Settings link above to fill in your bot settings.</p>
+            <p>If you have already setup your bot, click on the Dashboard link above.</p>
+          </div>
         </div>
-      // children = <UserCard user={this.props.user} logout={this.props.fn.logout} />
     } else {
       children = [
         <SocialButton
@@ -41,7 +45,20 @@ class Login extends Component {
     return (
         <div>
 
-            {children}
+        {isLoggedIn ? (
+          <Jumbotron
+            title={`Welcome, ${this.props.state.dbUser.username}!`}
+            body="You are successfully logged in."
+          /> 
+        ):(
+          <Jumbotron
+            title="Login"
+            body="Please login to use DigiFriend."
+          />
+        )
+        }
+
+          {children}
 
         </div>
 

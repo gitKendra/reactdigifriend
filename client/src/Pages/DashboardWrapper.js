@@ -4,6 +4,7 @@ import Dashboard from '../components/Dashboard';
 import Commands from '../components/Commands'
 import helpers from '../utils/helpers';
 import tmi from 'tmijs-es5';
+import Jumbotron from '../components/Jumbotron';
 
 class DashboardWrapper extends Component{
 
@@ -186,7 +187,11 @@ class DashboardWrapper extends Component{
     renderNotLoggedIn = () => {
         return(
             <div >
-                <h4 className="text-center">You must be logged in to access your settings.</h4>
+                <Jumbotron
+                    title="Dashboard"
+                    body="The place to view your chat, digiFriend, and view/add custom commands."
+                />
+                <p className="text-center">You must be logged in to access your dashboard.</p>
             </div>
         )
     }
@@ -194,15 +199,21 @@ class DashboardWrapper extends Component{
     renderNoSettings = () => {
         return(
             <div >
-                <h4 className="text-center mt-5">Update your settings first!</h4>
+                <Jumbotron
+                    title="Dashboard"
+                    body="The place to view your chat, digiFriend, and view/add custom commands."
+                />                
+                <p className="text-center mt-5">Update your settings first!</p>
             </div>
-        )    }
+        )    
+    }
 
 
     render(){
 
         const {match} = this.props;
         // Only render the dashboard if user is logged in
+
         if(this.props.isLoggedIn){
 
             if(this.props.user.botSettings === undefined){
@@ -211,6 +222,10 @@ class DashboardWrapper extends Component{
 
             return(             
                 <div>
+                    <Jumbotron
+                        title="Dashboard"
+                        body="The place to view your chat, digiFriend, and view/add custom commands."
+                    />
 
                     { this.state.comBtnVisible ?
                     <button className="btn btn-success" onClick={this.showDashBtn}>
