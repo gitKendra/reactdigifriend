@@ -45,8 +45,11 @@ class DashboardWrapper extends Component{
             }
         })
     }
+
     componentWillUnmount() {
-        this.state.botClient.disconnect();
+        if(this.state.botClient !== "notSet"){
+            this.state.botClient.disconnect();
+        }
     }
     loadBotClient = () => {
         console.log("Loading BotClient");
@@ -94,8 +97,7 @@ class DashboardWrapper extends Component{
                         if(spriteCommands[i].name === msg.command.substring(5)){
                             response = "/me " + spriteCommands[i].message;
                             // TODO: CALL ACTION ON CANVAS
-                            jump.canView();
-
+                            window.jumpy();
 
                             break;
                         }
