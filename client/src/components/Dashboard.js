@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chatbox from './Dashboard/Chatbox';
-import Canvas from './Dashboard/canView';
+import Canvas from './canvas/canView';
 
 class Dashboard extends Component {
 
@@ -13,8 +13,8 @@ class Dashboard extends Component {
     
     var styleCan = {
     float:'right',
-    width:'500',
-    height:'500'
+    width:'475',
+    height:'475'
   }
 
     return (

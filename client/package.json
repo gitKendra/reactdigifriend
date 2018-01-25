@@ -6,6 +6,7 @@
     "axios": "^0.17.1",
     "konva": "^1.7.6",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
     "react-konva": "^1.6.6",
     "react-router-dom": "^4.2.2",
