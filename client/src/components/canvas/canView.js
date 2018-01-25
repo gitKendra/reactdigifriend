@@ -19,14 +19,17 @@ class IdleImage extends React.Component {
   // }
 
   componentDidMount() {
-    this.state.image.src = process.env.PUBLIC_URL +  ["/images/jump3.png", 
-    "/images/jump1", 
-    "/images/jump2.png", 
-    "/images/jump3.png",
-    "/images/jump4.png"];
+    this.state.image.src = process.env.PUBLIC_URL +  "/images/idle2.png";
+    this.state.image.src = process.env.PUBLIC_URL +  "/images/jump1.png";
+    this.state.image.src = process.env.PUBLIC_URL +  "/images/jump2.png";
+    this.state.image.src = process.env.PUBLIC_URL +  "/images/jump3.png";
+    this.state.image.src = process.env.PUBLIC_URL +  "/images/jump4.png";
     this.state.image.onload = () => {     
     this.imageNode.getLayer().batchDraw();
     };
+    setInterval((function() {
+          // switch the image source
+        })(), 5000)
     
   }
   

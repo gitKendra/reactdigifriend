@@ -88,7 +88,7 @@ class DashboardWrapper extends Component{
                         if(spriteCommands[i].name === msg.command.substring(5)){
                             response = "/me " + spriteCommands[i].message;
                             // TODO: CALL ACTION ON CANVAS
-                            jump.canView()
+                            jump.canView();
 
 
                             break;
