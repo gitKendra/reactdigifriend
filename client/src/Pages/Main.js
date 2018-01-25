@@ -130,6 +130,8 @@ class Main extends Component {
               }
             />
 
+            {/* Any routes not listed will take user to Home */}
+            <Route component={Home} />
           </Switch>
 
         </div>
