@@ -30,7 +30,7 @@ var currentImageIndex = -1,
     };
 
     
-]
+
 $(document).on('keyup', function(e){
     var key = e.which;
     if(key == 13)  // the enter key ascii code
