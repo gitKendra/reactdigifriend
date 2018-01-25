@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chatbox from './Dashboard/Chatbox';
-import Canvas from './Dashboard/canView';
+import Canvas from './canvas/canView';
 
 class Dashboard extends Component {
 
@@ -11,15 +11,15 @@ class Dashboard extends Component {
 
   render() {
     
-    var style = {
+    var styleCan = {
     float:'right',
-    width:'500',
-    height:'500'
+    width:'475',
+    height:'475'
   }
 
     return (
       <div className="container">
-				<div style={style} id="canvasDiv">
+				<div style={styleCan} id="canvasDiv">
           <Canvas />
         </div>
 				

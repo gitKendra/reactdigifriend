@@ -5,6 +5,7 @@ import Commands from '../components/Commands'
 import Jumbotron from '../components/Jumbotron';
 import helpers from '../utils/helpers';
 import tmi from 'tmijs-es5';
+import jump from '../components/canvas/canView';
 
 class DashboardWrapper extends Component{
 
@@ -91,6 +92,8 @@ class DashboardWrapper extends Component{
                         if(spriteCommands[i].name === msg.command.substring(5)){
                             response = "/me " + spriteCommands[i].message;
                             // TODO: CALL ACTION ON CANVAS
+                            jump.canView();
+
 
                             break;
                         }
