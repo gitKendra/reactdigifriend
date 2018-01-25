@@ -44,7 +44,7 @@
     </div>
 
 
-    <div style="background:lightgreen; width:500px; margin:auto; " id="canvasDiv"></div>
+    <div style="background:lightgreen; width:500px; margin:20px auto; " id="canvasDiv"></div>
 
 
 
@@ -78,7 +78,14 @@
         function jumpy() {
             jump();
         }
-       
+        function showCanvas() {
+          document.getElementById("canvasDiv").style.display = "block";
+        }
+        function hideCanvas() {
+          document.getElementById("canvasDiv").style.display = "none";
+        }
+
+        hideCanvas();      
     </script>
 
 </body>

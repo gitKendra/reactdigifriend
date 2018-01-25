@@ -38,6 +38,7 @@ class DashboardWrapper extends Component{
                             this.setState({ spriteCommands: dbSprite.data.commands}, () =>{
                                 console.log("set dbw state with sprite commands", this.state.spriteCommands);
                                 this.loadBotClient()
+                                window.showCanvas();
                             });
                         });
                     });
@@ -50,6 +51,7 @@ class DashboardWrapper extends Component{
         if(this.state.botClient !== "notSet"){
             this.state.botClient.disconnect();
         }
+        window.hideCanvas();
     }
     loadBotClient = () => {
         console.log("Loading BotClient");
