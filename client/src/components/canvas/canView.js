@@ -33,7 +33,8 @@ class IdleImage extends React.Component {
 class JumpImage extends React.Component {
   
   state = {
-    image: new window.Image()
+    image: new window.Image(),
+    isHidden:true
   };
 
   componentDidMount() {
@@ -61,7 +62,8 @@ class JumpImage extends React.Component {
 class JumpTwoImage extends React.Component {
   
   state = {
-    image: new window.Image()
+    image: new window.Image(),
+    isHidden:true
   };
 
   componentDidMount() {
@@ -88,7 +90,8 @@ class JumpTwoImage extends React.Component {
 class JumpThreeImage extends React.Component {
   
   state = {
-    image: new window.Image()
+    image: new window.Image(),
+    isHidden:true
   };
 
   componentDidMount() {
@@ -115,7 +118,8 @@ class JumpThreeImage extends React.Component {
 class JumpFourImage extends React.Component {
   
   state = {
-    image: new window.Image()
+    image: new window.Image(),
+    isHidden:true
   };
 
   componentDidMount() {
@@ -142,7 +146,7 @@ class JumpFourImage extends React.Component {
 class App extends Component {
   render() {
     return (
-      <Stage width={500} height={500}>
+      <Stage width={475} height={475}>
         <Layer>
           <IdleImage />
           <JumpImage />
