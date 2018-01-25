@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import Commands from '../components/Commands'
+import Jumbotron from '../components/Jumbotron';
 import helpers from '../utils/helpers';
 import tmi from 'tmijs-es5';
-import Jumbotron from '../components/Jumbotron';
 
 class DashboardWrapper extends Component{
 
@@ -13,15 +13,14 @@ class DashboardWrapper extends Component{
         channel: "",
         userCommands: [],
         spriteCommands: [],
-        comBtnVisible: ""
+        comBtnVisible: "",
+        botClient:""
     }
 
     componentDidMount() {
-        console.log(this.props);
-        // Don't do anything if user isn't logged in
 
         // Get user data from db to display customized dashboard
-        this.setState({ id: this.props.user._id, comBtnVisible: true }, () => {
+        this.setState({ id: this.props.user._id, comBtnVisible: true , botClient:"notSet"}, () => {
             console.log("Set dbw state with id", this.state.id);
 
             if(this.props.isLoggedIn && this.props.user.botSettings !== undefined){
@@ -51,6 +50,12 @@ class DashboardWrapper extends Component{
         const userCommands = this.state.userCommands;
         const spriteCommands = this.state.spriteCommands;
 
+         // Disconnect current botClient, if exists, before loading a new instance
+         if(this.state.botClient !== "notSet"){
+            this.state.botClient.disconnect().then(function(data) {
+                console.log("DISCONNECT CLIENT FROM SERVER");
+            });
+        }
         // Create and setup bot
         var botClient = tmi.client({
             options: {debug: true},
@@ -62,7 +67,7 @@ class DashboardWrapper extends Component{
         });
 
         // Connect to chat server
-        botClient.connect().then((data) => {
+        botClient.connect().then((data) => { 
             botClient.join(this.state.channel)  
         });
         
@@ -81,9 +86,8 @@ class DashboardWrapper extends Component{
 
                 //Check if it's a sprite command
                 if(msg.command.substring(0,5) === '!digi'){
-                    // Check if sprite command
+
                     for(let i=0; i<spriteCommands.length; i++){
-                        console.log(msg.command.substring(5));
                         if(spriteCommands[i].name === msg.command.substring(5)){
                             response = "/me " + spriteCommands[i].message;
                             // TODO: CALL ACTION ON CANVAS
@@ -101,19 +105,13 @@ class DashboardWrapper extends Component{
                         }
                     }
                 }
-
             }
 
             if(response === undefined){
                 return;
             }
             else{
-                botClient.say(channel, response).then(function(data) {
-                // botClient.say(channel, `${userstate.username} ${response}`).then(function(data) {
-                    // data returns [channel]
-                }).catch(function(err) {
-                    console.log(err);
-                });
+                botClient.say(channel, response);
             }
         });
         
@@ -134,21 +132,18 @@ class DashboardWrapper extends Component{
     // Retrieves the custom commands stored in the database for user
     // Reloads bot to keep it up-to-date with most current db pull
     getUserCommands = () => {
-        console.log("GET user commands");
+
         helpers.getSaved(this.props.user._id)
         .then((commandData) => {
             this.setState({ userCommands: commandData.data }, () => {
                 this.loadBotClient();
             });
-            console.log("retrieved commands from db", commandData.data);
         });
     }
 
-    // Retrieves sprite doc then sets state based on their commands
+    // Retrieves sprite doc then sets state sprite commands
     getSpriteCommands = () => {
         helpers.getSprite(this.props.user.sprite_id).then((dbSprite) => {
-            // set the sprite commands state
-            console.log("retrieved Sprite doc", dbSprite);
             this.setState({ spriteCommands: dbSprite.data.commands});
         });
     }
@@ -170,6 +165,7 @@ class DashboardWrapper extends Component{
         });
     }
 
+    // Update button according to which route/subroute user is currently on
     showComBtn = () => {
         this.setState({ comBtnVisible: true });
     }
@@ -211,12 +207,12 @@ class DashboardWrapper extends Component{
         )    
     }
 
-
     render(){
 
         const {match} = this.props;
+        const viewCombtn = this.state.comBtnVisible;
+        
         // Only render the dashboard if user is logged in
-
         if(this.props.isLoggedIn){
 
             if(this.props.user.botSettings === undefined){
@@ -230,15 +226,16 @@ class DashboardWrapper extends Component{
                         body="The place to view your chat, digiFriend, and view/add custom commands."
                     />
 
-                    { this.state.comBtnVisible ?
-                    <button className="btn btn-success" onClick={this.showDashBtn}>
-                        <Link to={`${match.url}/commands`}>List of commands</Link>
-                    </button>
-                    :
-                    <button className="btn btn-success" onClick={this.showComBtn}>
-                        <Link to={"/dashboard"}>Back to Dashboard</Link>
-                    </button>               
-                }
+                    <div className="container">
+                        { viewCombtn ?
+                        <button className="btn btn-success" onClick={this.showDashBtn}>
+                            <Link className="link" to={`${match.url}/commands`}>List of commands</Link>
+                        </button>
+                        :
+                        <button className="btn btn-success" onClick={this.showComBtn}>
+                            <Link className="link" to={"/dashboard"}>Back to Dashboard</Link>
+                        </button>               
+                        }
                     
                     {/* Add Subroute to current route*/}
                     <Route 
@@ -258,6 +255,7 @@ class DashboardWrapper extends Component{
                             />
                         }
                     />
+                    </div>
                 </div>
             );
         }

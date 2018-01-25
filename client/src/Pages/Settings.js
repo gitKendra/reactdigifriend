@@ -91,9 +91,9 @@ class Settings extends Component {
           <div className="card-body">
 
             <div className="text-center">
-              <h4 className="font-up">Bot Settings</h4>
+              <h4 className="font-up" style={{color: "#512da8"}}>Bot Settings</h4>
             </div>
-            <hr style={{'height': '12px', 'border': '0', 'box-shadow': 'inset 0 12px 12px -12px rgba(0, 0, 0, 0.5)'}}/>
+            <hr style={{'height': '12px', 'border': '0', 'boxShadow': 'inset 0 12px 12px -12px rgba(0, 0, 0, 0.5)'}}/>
             
               <div className="md-form">
                 <h4 className=""><strong>Bot name:</strong></h4>
@@ -142,9 +142,9 @@ class Settings extends Component {
           <div className="card mt-4">
             <div className="card-body">
               <div className="text-center mt-2">
-                <h4 className="font-up">Choose a DigiFriend</h4>
+                <h4 className="font-up" style={{color: "#512da8"}}>Choose a DigiFriend</h4>
               </div>
-              <hr style={{'height': '12px', 'border': '0', 'box-shadow': 'inset 0 12px 12px -12px rgba(0, 0, 0, 0.5)'}}/>
+              <hr style={{'height': '12px', 'border': '0', 'boxShadow': 'inset 0 12px 12px -12px rgba(0, 0, 0, 0.5)'}}/>
 
               <div className="container md-form">
                 <div className="spriteList row justify-content-md-center">

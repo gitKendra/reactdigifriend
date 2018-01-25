@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
 import Navbar from '../components/Navbar/Navbar';
-import Jumbotron from '../components/Jumbotron';
 import Login from './Login';
 import DashboardWrapper from './DashboardWrapper';
 import Settings from './Settings';
