@@ -45,7 +45,9 @@ class DashboardWrapper extends Component{
             }
         })
     }
-
+    componentWillUnmount() {
+        this.state.botClient.disconnect();
+    }
     loadBotClient = () => {
         console.log("Loading BotClient");
         const userCommands = this.state.userCommands;
