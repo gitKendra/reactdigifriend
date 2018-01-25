@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Jumbotron from '../components/Jumbotron';
+import screenshot from '../components/screenshot.PNG';
 
 class Home extends Component {
 
@@ -54,6 +55,16 @@ class Home extends Component {
 															</div>
 													</div>
 											</div>
+									</div>
+									<div className="row justify-content-md-center">
+										<div className="col-lg-12">
+										<div className="card mt-2">
+										<div className="card-body">
+										<h4 className="font-up"  style={style.h4}>Twitch Screenshot</h4>
+											<img className="responsive mx-auto d-block mt-3" style={{width: '855px'}} alt="obs-screenshot" src={screenshot} />
+										</div>
+										</div>
+										</div>
 									</div>
 							</div>
 							
