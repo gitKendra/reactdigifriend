@@ -4,7 +4,7 @@ var images = {};
 var totalResources = 9;
 var numResourcesLoaded = 0;
 var fps = 30;
-var charX = 245;
+var charX = 210;
 var charY = 185;
 var breathInc = 0.1;
 var breathDir = 1;
@@ -166,25 +166,25 @@ function updateBreath() {
   }
 }
 
-// function updateBlink() { 
+function updateBlink() { 
 				
-//   eyeOpenTime += blinkUpdateTime;
+  eyeOpenTime += blinkUpdateTime;
 	
-//   if(eyeOpenTime >= timeBtwBlinks){
-// 	blink();
-//   }
-// }
+  if(eyeOpenTime >= timeBtwBlinks){
+	blink();
+  }
+}
 
-// function blink() {
+function blink() {
 
-//   curEyeHeight -= 1;
-//   if (curEyeHeight <= 0) {
-// 	eyeOpenTime = 0;
-// 	curEyeHeight = maxEyeHeight;
-//   } else {
-// 	setTimeout(blink, 10);
-//   }
-// }
+  curEyeHeight -= 1;
+  if (curEyeHeight <= 0) {
+	eyeOpenTime = 0;
+	curEyeHeight = maxEyeHeight;
+  } else {
+	setTimeout(blink, 10);
+  }
+}
 
 function jump() {
 	
