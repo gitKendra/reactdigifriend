@@ -65,7 +65,7 @@ class DashboardWrapper extends Component{
         // Create and setup bot
         var botClient = tmi.client({
             options: {debug: true},
-            connection: {reconnect: true},
+            connection: {reconnect: true, secure: true},
             identity: {
                 username: this.props.user.botSettings.name, 
                 password: this.props.user.botSettings.oAuth},

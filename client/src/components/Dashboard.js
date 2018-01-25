@@ -14,7 +14,10 @@ class Dashboard extends Component {
     
     
     return (
-      <div className="container">
+
+      <div className="container"  style={{width:'420px'}}>
+
+
 				
         {((this.props.botClient !== null) && <Chatbox channel={this.props.channel} botClient={this.props.botClient} /> )}
 
