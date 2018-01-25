@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import { render } from "react-dom";
 import { Stage, Layer, Image } from "react-konva";
 import { Input } from 'react-bootstrap';
@@ -10,14 +10,14 @@ class IdleImage extends React.Component {
     image: new window.Image()
   };
   
-  handleKeyPress(target) {
-    if(target.charCode==13){
-      setInterval((function() {
-      // switch the image source
-    })(), 5000)
-      alert('Enter clicked!!!');    
-  }
-  
+  // handleKeyPress(target) {
+  //   if(target.charCode==13){
+  //     setInterval((function() {
+  //     // switch the image source
+  //   })(), 5000)
+  //     alert('Enter clicked!!!');    
+  // }
+
   componentDidMount() {
     this.state.image.src = process.env.PUBLIC_URL +  ["/images/jump3.png", 
     "/images/jump1", 
@@ -51,10 +51,6 @@ class App extends Component {
       <Stage width={475} height={475}>
         <Layer>
           <IdleImage />
-          {/* <JumpImage />
-          <JumpTwoImage />
-          <JumpThreeImage />
-          <JumpFourImage /> */}
         </Layer>
       </Stage>
     );
