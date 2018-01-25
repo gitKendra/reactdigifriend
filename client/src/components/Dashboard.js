@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chatbox from './Dashboard/Chatbox';
-import Canvas from './canvas/canView';
+// import Canvas from './canvas/canView';
+// import index from '../public/index';
 
 class Dashboard extends Component {
 
@@ -20,7 +21,7 @@ class Dashboard extends Component {
     return (
       <div className="container">
 				<div style={styleCan} id="canvasDiv">
-          <Canvas />
+          {/* <Canvas /> */}
         </div>
 				
         {((this.props.botClient !== null) && <Chatbox channel={this.props.channel} botClient={this.props.botClient} /> )}
