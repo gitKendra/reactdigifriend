@@ -1,32 +1,40 @@
-function imgChange() {
+import pics from '../../../public/images';
 
-    var i = true;
+var currentImageIndex = -1,
+        maxImageIndex = 0,
+        images = ['idle2.png','jump1.png', 'jump2.png', 'jump3.png', 'jump4.png'],
+        changeInterval = 1500;
 
-    if(i) {
-       
-        document.getElementByClass("IdleImage").src = process.env.PUBLIC_URL +  "/images/idle2.png", 2000;
+    var setUp = function() {
+        images = document.images;
+        maxImageIndex = images.length;
+        currentImageIndex = 0;
+    };
+    
+    var jump = function() {
+        var i;
 
-    } else {
+        currentImageIndex = (currentImageIndex >= maxImageIndex - 1) ? 0 : currentImageIndex += 1;
 
-       document.getElementByClass("IdleImage").src = process.env.PUBLIC_URL +  "/images/jump1.png";
-    }};
+        for (i = 0; i < maxImageIndex; i += 1) {
+            images[i].hidden = (i !== currentImageIndex);
+        }
+    };
 
-    // else if {
+    this.onload = function() {
+        setUp();
 
-    //     document.getElementByClass("IdleImage").src = process.env.PUBLIC_URL +  "/images/jump2.png";
-    // } else if {
+        images[currentImageIndex].hidden = false; 
 
-    //     document.getElementByClass("IdleImage").src = process.env.PUBLIC_URL +  "/images/jump3.png";
-    // } else {
+        setInterval(changeBanner, changeInterval); 
+    };
 
-    //     document.getElementByClass("IdleImage").src = process.env.PUBLIC_URL +  "/images/jump4.png";
-
-    // }
-   
-    // $(document).on('keyup', function(e){
-    //     var key = e.which;
-    //     if(key == 13)  
-    //     {
-    //       imageChange();
-    //     }
-    // });
+    
+]
+$(document).on('keyup', function(e){
+    var key = e.which;
+    if(key == 13)  // the enter key ascii code
+    {
+      jump();
+    }
+});

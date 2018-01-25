@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Stage, Layer, Image } from "react-konva";
 import { Input } from 'react-bootstrap';
 import canStyle from "../canvas/canStyle.css";
-import jump from "../canvas/jump.js";
+// import jump from "../canvas/jump.js";
 
 class IdleImage extends React.Component {
   
