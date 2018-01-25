@@ -67,6 +67,7 @@ class Main extends Component {
         currentProvider: '',
         user: {}
       })
+      window.hideCanvas();
     },
 
     onLogoutFailure : (err) => {
