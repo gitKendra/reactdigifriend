@@ -12,17 +12,9 @@ class Dashboard extends Component {
 
   render() {
     
-    var styleCan = {
-    float:'right',
-    width:'475',
-    height:'475'
-  }
-
+    
     return (
       <div className="container">
-				<div style={styleCan} id="canvasDiv">
-          {/* <Canvas /> */}
-        </div>
 				
         {((this.props.botClient !== null) && <Chatbox channel={this.props.channel} botClient={this.props.botClient} /> )}
 

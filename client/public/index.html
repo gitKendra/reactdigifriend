@@ -43,7 +43,7 @@
 
     </div>
 
-    <div id="canvasDiv"></div>
+    <div style="background:lightgreen; width:500px; margin:auto; " id="canvasDiv"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -65,12 +65,39 @@
     <script type="text/javascript" src="jump.js"></script>
     <script type="text/javascript">
         prepareCanvas(document.getElementById("canvasDiv"), 490, 220);
-        document.getElementById("canvasDiv").onmouseover = function() {
+        document.getElementById("canvasDiv").onmousedown = function() {
             jump();
         }
+
         function jumpy() {
-          jump();
+            jump();
         }
+        // document.addEventListener('keydown', function(event) {
+        //     if (event.code == 'KeyZ' && (event.ctrlKey || event.metaKey)) {
+        //         function showSprite() {
+        //             document.getElementById('canvasDiv').style.visibility = 'visible';
+        //         }
+        //     }
+        // });
+        // $(document).ready(function() {
+        //     $("#GlobalSearchInput").keyup(function() {
+        //         var x = document.getElementById('canvasDiv');
+        //         if ($(this).val() == "") {
+        //             x.style.display = 'none';
+        //         } else {
+        //             x.style.display = 'block';
+        //         }
+        //     });
+        // });
+        // $(document).on('keyup', function(e) {
+        //     var key = e.which;
+        //     if (key == 13) // the enter key ascii code
+        //     {
+        //         function showSprite() {
+        //             document.getElementById('canvasDiv').style.visibility = 'visible';
+        //         }
+        //     }
+        // });
     </script>
 
 </body>
