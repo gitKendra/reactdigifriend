@@ -58,7 +58,8 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
 function loadImage(name) {
 
   images[name] = new Image();
-  images[name].onload = function() { 
+  images[name].onload = function() {
+		console.log(images[name]); 
 	  resourceLoaded();
   }
   images[name].src = "images/" + name + ".png";

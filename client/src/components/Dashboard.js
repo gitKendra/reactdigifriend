@@ -11,7 +11,7 @@ class Dashboard extends Component {
 
   render() {
     
-    var style = {
+    var styleCan = {
     float:'right',
     width:'500',
     height:'500'
@@ -19,7 +19,7 @@ class Dashboard extends Component {
 
     return (
       <div className="container">
-				<div style={style} id="canvasDiv">
+				<div style={styleCan} id="canvasDiv">
           <Canvas />
         </div>
 				
